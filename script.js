@@ -4,8 +4,9 @@
    ============================================================ */
 const CONFIG = {
 
-  // Códigos válidos para entrar (no distingue mayúsculas/espacios)
-  accessCodes: ["te amo", "14 febrero", "PLACEHOLDER_CODIGO"],
+  // Código numérico de acceso. Todos deben tener la misma longitud que codeLength.
+  codeLength: 4,
+  accessCodes: ["0214", "1234"], // PLACEHOLDER: pon el/los código(s) numéricos válidos
 
   // Pistas que aparecen progresivamente tras fallar el código
   hints: [
@@ -102,7 +103,8 @@ const state = {
   catchScore: 0,
   catchTimer: null,
   basketX: 50, // porcentaje
-  selectedOutfit: null
+  selectedOutfit: null,
+  enteredCode: ""
 };
 
 /* ============================================================
@@ -122,30 +124,82 @@ document.querySelectorAll("[data-goto]").forEach((el) => {
 });
 
 /* ============================================================
-   CANDADO
+   CANDADO (código numérico + teclado)
    ============================================================ */
-const lockForm = document.getElementById("lock-form");
-const lockInput = document.getElementById("lock-input");
 const lockCard = document.querySelector(".lock-card");
 const hintText = document.getElementById("hint-text");
+const codeBoxesEl = document.getElementById("code-boxes");
+const keypadEl = document.getElementById("keypad");
 const petPopup = document.getElementById("pet-popup");
 const petMessage = document.getElementById("pet-message");
 const petEmoji = document.getElementById("pet-emoji");
 
-// Posiciones del sprite gatitosinicio.png (cuadrícula de 3 columnas x 2 filas)
+// Gatitos recortados individualmente (ver assets/gato-0.png ... gato-5.png)
 const petFrames = [
-  "0% 0%", "50% 0%", "100% 0%",
-  "0% 100%", "50% 100%", "100% 100%"
+  "assets/gato-0.png", "assets/gato-1.png", "assets/gato-2.png",
+  "assets/gato-3.png", "assets/gato-4.png", "assets/gato-5.png"
 ];
 
 function normalize(str) {
   return str.trim().toLowerCase();
 }
 
-lockForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const value = normalize(lockInput.value);
-  const isValid = CONFIG.accessCodes.some((code) => normalize(code) === value);
+function renderCodeBoxes() {
+  codeBoxesEl.innerHTML = "";
+  for (let i = 0; i < CONFIG.codeLength; i++) {
+    const box = document.createElement("div");
+    box.className = "code-box";
+    box.textContent = "♡";
+    codeBoxesEl.appendChild(box);
+  }
+}
+
+function updateCodeBoxes() {
+  const boxes = codeBoxesEl.querySelectorAll(".code-box");
+  boxes.forEach((box, i) => {
+    const filled = i < state.enteredCode.length;
+    box.classList.toggle("filled", filled);
+    box.textContent = filled ? "❤" : "♡";
+  });
+}
+
+function renderKeypad() {
+  const keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0", "DEL"];
+  keypadEl.innerHTML = "";
+  keys.forEach((key) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "keypad-btn";
+    if (key === "") {
+      btn.classList.add("keypad-empty");
+    } else if (key === "DEL") {
+      btn.classList.add("keypad-del");
+      btn.textContent = "DEL";
+      btn.addEventListener("click", pressDelete);
+    } else {
+      btn.textContent = key;
+      btn.addEventListener("click", () => pressDigit(key));
+    }
+    keypadEl.appendChild(btn);
+  });
+}
+
+function pressDigit(digit) {
+  if (state.enteredCode.length >= CONFIG.codeLength) return;
+  state.enteredCode += digit;
+  updateCodeBoxes();
+  if (state.enteredCode.length === CONFIG.codeLength) {
+    setTimeout(checkCode, 200);
+  }
+}
+
+function pressDelete() {
+  state.enteredCode = state.enteredCode.slice(0, -1);
+  updateCodeBoxes();
+}
+
+function checkCode() {
+  const isValid = CONFIG.accessCodes.some((code) => normalize(code) === state.enteredCode);
 
   if (isValid) {
     goTo("screen-cake");
@@ -158,12 +212,20 @@ lockForm.addEventListener("submit", (e) => {
   lockCard.classList.add("shake");
   showPetMessage();
   updateHint();
+  state.enteredCode = "";
+  updateCodeBoxes();
+}
+
+document.addEventListener("keydown", (e) => {
+  if (document.getElementById("screen-lock").getAttribute("data-active") !== "true") return;
+  if (e.key >= "0" && e.key <= "9") pressDigit(e.key);
+  if (e.key === "Backspace") pressDelete();
 });
 
 function showPetMessage() {
   const msg = CONFIG.petMessages[Math.floor(Math.random() * CONFIG.petMessages.length)];
   petMessage.textContent = msg;
-  petEmoji.style.backgroundPosition = petFrames[Math.floor(Math.random() * petFrames.length)];
+  petEmoji.style.backgroundImage = `url('${petFrames[Math.floor(Math.random() * petFrames.length)]}')`;
   petPopup.classList.add("visible");
   clearTimeout(showPetMessage._t);
   showPetMessage._t = setTimeout(() => petPopup.classList.remove("visible"), 2600);
@@ -570,6 +632,8 @@ function animateConfetti() {
    INIT
    ============================================================ */
 function init() {
+  renderCodeBoxes();
+  renderKeypad();
   renderGallery();
   renderDaysCounter();
   renderSongs();

@@ -18,14 +18,10 @@
   <!-- PANTALLA: CANDADO -->
   <section class="screen" id="screen-lock" data-active="true">
     <div class="lock-card">
-      <div class="lock-icon">🔒</div>
-      <h1 class="title">Acceso Nivel: Novio</h1>
-      <p class="subtitle">Escribe el código secreto para continuar...</p>
-      <form id="lock-form" autocomplete="off">
-        <input type="text" id="lock-input" class="lock-input" placeholder="Código secreto" />
-        <button type="submit" class="btn btn-primary">Entrar 💫</button>
-      </form>
+      <h1 class="title">Ingresa el código</h1>
+      <div class="code-boxes" id="code-boxes"></div>
       <p class="hint-text" id="hint-text"></p>
+      <div class="keypad" id="keypad"></div>
     </div>
 
     <div class="pet-popup" id="pet-popup">

@@ -17,7 +17,7 @@ Página sorpresa de cumpleaños interactiva. HTML + CSS + JS puro, sin framework
 
 Todo lo editable está al principio de `script.js`, dentro del objeto `CONFIG`. Busca los campos marcados `PLACEHOLDER` y reemplázalos:
 
-- **accessCodes**: frases que abren el candado (no distingue mayúsculas ni espacios extra).
+- **codeLength / accessCodes**: el candado ahora es un código numérico (con teclado en pantalla y cajitas de corazón). `codeLength` define cuántos dígitos tiene, y `accessCodes` es la lista de códigos válidos de esa misma longitud (ej. `"0214"`).
 - **hints**: pistas que se desbloquean tras varios intentos fallidos (cada `attemptsPerHint`).
 - **petMessages**: mensajes random que dice el gatito cuando el código falla.
 - **anniversaryDate**: fecha en formato `YYYY-MM-DD` para el contador de días juntos.
