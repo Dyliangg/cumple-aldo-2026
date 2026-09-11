@@ -215,8 +215,9 @@ body {
   background: rgba(255, 255, 255, 0.14);
 }
 
-.keypad-btn.keypad-empty {
-  visibility: hidden;
+.keypad-btn.keypad-decorative {
+  color: var(--color-text-dim);
+  cursor: default;
   pointer-events: none;
 }
 

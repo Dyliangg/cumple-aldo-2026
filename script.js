@@ -164,14 +164,15 @@ function updateCodeBoxes() {
 }
 
 function renderKeypad() {
-  const keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0", "DEL"];
+  const keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "#", "0", "DEL"];
   keypadEl.innerHTML = "";
   keys.forEach((key) => {
     const btn = document.createElement("button");
     btn.type = "button";
     btn.className = "keypad-btn";
-    if (key === "") {
-      btn.classList.add("keypad-empty");
+    if (key === "#") {
+      btn.classList.add("keypad-decorative");
+      btn.textContent = "#";
     } else if (key === "DEL") {
       btn.classList.add("keypad-del");
       btn.textContent = "DEL";
