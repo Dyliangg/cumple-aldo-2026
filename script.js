@@ -144,7 +144,7 @@ function checkCode(){
   const messages = [
     "Inténtalo de nuevo, mi vida.",
     "El sistema no te reconoce... ¿o sí, pechocho?",
-    "Nop. Intenta de nuevo, mi abejita.",
+    "Nop. Intenta de nuevo, mi amor.",
     "Ese no era, mi amor.",
   ];
   showMascot();
