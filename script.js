@@ -1,660 +1,572 @@
-/* ============================================================
-   CONFIG — Edita aquí todo el contenido personalizado.
-   No hace falta tocar el resto del archivo.
-   ============================================================ */
+// ============================================================
+// CONFIGURACIÓN — edita aquí los datos personales
+// ============================================================
 const CONFIG = {
+  // Código de acceso (4 dígitos): fecha de la primera salida (28 de febrero)
+  accessCode: "2802",
 
-  // Código numérico de acceso. Todos deben tener la misma longitud que codeLength.
-  codeLength: 4,
-  accessCodes: ["0214", "1234"], // PLACEHOLDER: pon el/los código(s) numéricos válidos
-
-  // Pistas que aparecen progresivamente tras fallar el código
-  hints: [
-    "Pista 1: es algo que me dices seguido... (PLACEHOLDER)",
-    "Pista 2: tiene que ver con una fecha importante para nosotros (PLACEHOLDER)",
-    "Pista 3: ok te lo regalo, pregúntame en persona 😏"
-  ],
-  attemptsPerHint: 2, // cada cuántos fallos se desbloquea una pista nueva
-
-  // Mensajes random del gatito cuando el código es incorrecto
-  petMessages: [
-    "Mmm, ese no es... ¡inténtalo de nuevo!",
-    "¡Casi! Bueno, no tan casi jaja",
-    "Piensa con el corazón, no con la cabeza 💜",
-    "Nop. Pero me caes bien igual.",
-    "El código está más cerca de lo que crees..."
+  // Fotos de tu gatito para el popup de código incorrecto (archivos en assets/).
+  catPhotos: [
+    "assets/gato-0.png",
+    "assets/gato-1.png",
+    "assets/gato-2.png",
+    "assets/gato-3.png",
+    "assets/gato-4.png",
+    "assets/gato-5.png"
   ],
 
-  // Fecha de inicio de la relación (para el contador de días) — formato YYYY-MM-DD
-  anniversaryDate: "2023-02-14", // PLACEHOLDER: ajusta a su fecha real
+  // Fecha en que empezaron a ser novios, para el contador
+  anniversaryDate: new Date(2026, 2, 29), // meses en JS empiezan en 0 -> marzo = 2
 
-  // Galería de fotos. Si "img" está vacío se muestra un degradado de relleno.
-  gallery: [
-    { img: "", caption: "Nuestra primera cita 💕" },
-    { img: "", caption: "Ese viaje inolvidable ✈️" },
-    { img: "", caption: "Cuando te reíste tanto 😂" },
-    { img: "", caption: "Mi foto favorita de los dos 📸" },
-    { img: "", caption: "Ese día random pero perfecto 🌙" },
-    { img: "", caption: "PLACEHOLDER: agrega tu propia foto" }
+  // Frases/captions de las fotos de la galería (edita con tus recuerdos reales)
+  photos: [
+    { caption: "El día que salimos por primera vez", date: "28 feb 2026" },
+    { caption: "El día que me pediste ser tu novia", date: "29 mar 2026" },
+    { caption: "[agrega tu recuerdo aquí]", date: "[fecha]" },
+    { caption: "[agrega tu recuerdo aquí]", date: "[fecha]" },
+    { caption: "[agrega tu recuerdo aquí]", date: "[fecha]" },
+    { caption: "[agrega tu recuerdo aquí]", date: "[fecha]" },
   ],
 
-  // Canciones (usa el ID del video de YouTube, la parte después de v=)
+  // Canciones: pon el videoId de YouTube (lo que va después de "v=" en la URL)
   songs: [
-    { title: "Nuestra canción", youtubeId: "PLACEHOLDER_ID_1" },
-    { title: "Esa que cantamos en el carro", youtubeId: "PLACEHOLDER_ID_2" },
-    { title: "La que te dediqué", youtubeId: "PLACEHOLDER_ID_3" }
+    {
+      title: "Lenny Kravitz — [título de la canción]",
+      videoId: "", // pega aquí el ID de YouTube cuando lo tengas
+      quote: "Esta sonaba el día que me pediste ser tu novia. Desde ese momento es nuestra."
+    },
+    {
+      title: "Damiano David — First Time",
+      videoId: "",
+      quote: "Esta te la dediqué yo. Cada palabra decía justo lo que sentía por ti."
+    },
+    {
+      title: "Kevin Kaarl — San Lucas",
+      videoId: "",
+      quote: "Me la dedicaste tú, y desde entonces no la puedo escuchar sin pensar en ti."
+    },
+    {
+      title: "Los Amigos Invisibles — Encontré",
+      videoId: "",
+      quote: "“Encontré a la que me gusta”... y sí, así fue. Te encontré a ti."
+    },
   ],
 
-  // Texto de la carta (usa \n para saltos de línea/párrafos)
-  letter: `Mi amor,
+  // Outfit: emojis de opciones por categoría
+  outfit: {
+    top:    ["👕", "👔", "🧥"],
+    bottom: ["👖", "🩳", "👗"],
+    shoes:  ["👟", "🥾", "🩴"],
+  },
 
-Quiero que sepas todo lo que significas para mí...
-(PLACEHOLDER: escribe aquí tu carta completa)
+  // Toppings del pastel
+  toppings: ["🍓", "🍫", "🍒", "🌟", "🍩", "🧁"],
 
-Te amo mucho.
-Feliz cumpleaños.`,
-
-  // Opciones del minijuego "Elige el look"
-  outfits: [
-    { id: "casual", emoji: "👕", label: "Casual" },
-    { id: "elegante", emoji: "🤵", label: "Elegante" },
-    { id: "deportivo", emoji: "🏀", label: "Deportivo" },
-    { id: "playero", emoji: "🩴", label: "Playero" }
-  ],
-
-  // Adornos disponibles para decorar el pastel
-  decorItems: ["🍒", "🍫", "🍓", "✨", "🕯️", "🍬"],
-  decorGoal: 5, // cuántos adornos hay que colocar para completar el nivel
-
-  // Preguntas del quiz. "answers" acepta varias formas válidas (todo en minúsculas)
+  // Preguntas del nivel 3 (pistas y respuestas — edítalas)
   quiz: [
-    {
-      question: "¿En qué mes nos conocimos?",
-      answers: ["febrero", "PLACEHOLDER"]
-    },
-    {
-      question: "¿Cuál es mi comida favorita?",
-      answers: ["PLACEHOLDER"]
-    },
-    {
-      question: "¿Cómo se llama nuestra canción?",
-      answers: ["PLACEHOLDER"]
-    }
+    { clue: "Lugar de nuestra primera cita", answer: "" },
+    { clue: "Mi apodo cariñoso para ti", answer: "pechocho" },
+    { clue: "Lo que siempre pides de comer", answer: "" },
+    { clue: "El mes en que empezamos a salir", answer: "febrero" },
   ],
 
-  // Juego de atrapar corazones
-  catchTarget: 10, // puntos necesarios para pasar el nivel
-  catchSpeedMs: 900, // cada cuánto cae un nuevo objeto (ms)
+  // Frases que caen en el juego de besos
+  kissPhrases: ["💋", "💋", "Te amo", "💋", "Eres mi favorito", "💋", "Contigo siempre", "💋"],
 
-  // Texto del "vale" final que se revela al ganar
-  valeText: `VALE POR:
-Una cena a tu elección 🍽️
-(PLACEHOLDER: cámbialo por lo que quieras regalarle)`
+  // Texto del vale sorpresa final
+  valeText: "[escribe aquí el vale sorpresa: una cita, un día libre de quehaceres, etc.]",
 };
 
-/* ============================================================
-   ESTADO
-   ============================================================ */
-const state = {
-  failCount: 0,
-  levelsDone: { outfit: false, decorar: false, quiz: false, atrapar: false },
-  decorPlaced: 0,
-  quizIndex: 0,
-  catchScore: 0,
-  catchTimer: null,
-  basketX: 50, // porcentaje
-  selectedOutfit: null,
-  enteredCode: ""
-};
+// ============================================================
+// NAVEGACIÓN ENTRE PANTALLAS
+// ============================================================
+function goTo(id){
+  document.querySelectorAll(".screen").forEach(s => s.dataset.active = "false");
+  const target = document.getElementById(id);
+  target.dataset.active = "true";
+  window.scrollTo({ top: 0, behavior: "instant" });
 
-/* ============================================================
-   NAVEGACIÓN
-   ============================================================ */
-function goTo(id) {
-  document.querySelectorAll(".screen").forEach((el) => {
-    el.setAttribute("data-active", el.id === id ? "true" : "false");
-  });
-  window.scrollTo(0, 0);
-  if (id === "screen-game-atrapar") startCatchGame();
-  else stopCatchGame();
+  if (id === "screen-galeria") renderGallery();
+  if (id === "screen-musica") renderSongs();
+  if (id === "screen-game-outfit") renderOutfit();
+  if (id === "screen-game-cake") renderCakeDecor();
+  if (id === "screen-game-quiz") renderQuiz();
 }
 
-document.querySelectorAll("[data-goto]").forEach((el) => {
-  el.addEventListener("click", () => goTo(el.getAttribute("data-goto")));
+document.querySelectorAll("[data-target]").forEach(el => {
+  el.addEventListener("click", () => goTo(el.dataset.target));
 });
 
-/* ============================================================
-   CANDADO (código numérico + teclado)
-   ============================================================ */
-const lockCard = document.querySelector(".lock-card");
-const hintText = document.getElementById("hint-text");
-const codeBoxesEl = document.getElementById("code-boxes");
-const keypadEl = document.getElementById("keypad");
-const petPopup = document.getElementById("pet-popup");
-const petMessage = document.getElementById("pet-message");
-const petEmoji = document.getElementById("pet-emoji");
+// ============================================================
+// PANTALLA 1: CANDADO
+// ============================================================
+const pinDots = document.querySelectorAll(".pin-dot");
+const keypad = document.getElementById("keypad");
+const lockCard = document.querySelector("#screen-lock .lock-card");
+const lockHint = document.getElementById("lock-hint");
+const mascotOverlay = document.getElementById("mascot-overlay");
+const mascotFace = document.getElementById("mascot-face");
+const mascotMsg = document.getElementById("mascot-msg");
+const mascotRetry = document.getElementById("mascot-retry");
 
-// Gatitos recortados individualmente (ver assets/gato-0.png ... gato-5.png)
-const petFrames = [
-  "assets/gato-0.png", "assets/gato-1.png", "assets/gato-2.png",
-  "assets/gato-3.png", "assets/gato-4.png", "assets/gato-5.png"
-];
+const CODE_LENGTH = CONFIG.accessCode.length;
+let enteredCode = "";
+let failCount = 0;
 
-function normalize(str) {
-  return str.trim().toLowerCase();
-}
-
-function renderCodeBoxes() {
-  codeBoxesEl.innerHTML = "";
-  for (let i = 0; i < CONFIG.codeLength; i++) {
-    const box = document.createElement("div");
-    box.className = "code-box";
-    box.textContent = "♡";
-    codeBoxesEl.appendChild(box);
-  }
-}
-
-function updateCodeBoxes() {
-  const boxes = codeBoxesEl.querySelectorAll(".code-box");
-  boxes.forEach((box, i) => {
-    const filled = i < state.enteredCode.length;
-    box.classList.toggle("filled", filled);
-    box.textContent = filled ? "❤" : "♡";
+function updatePinDots(){
+  pinDots.forEach((dot, i) => {
+    const filled = i < enteredCode.length;
+    dot.textContent = filled ? "♥" : "♡";
+    dot.classList.toggle("filled", filled);
   });
 }
 
-function renderKeypad() {
-  const keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "#", "0", "DEL"];
-  keypadEl.innerHTML = "";
-  keys.forEach((key) => {
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "keypad-btn";
-    if (key === "#") {
-      btn.classList.add("keypad-decorative");
-      btn.textContent = "#";
-    } else if (key === "DEL") {
-      btn.classList.add("keypad-del");
-      btn.textContent = "DEL";
-      btn.addEventListener("click", pressDelete);
-    } else {
-      btn.textContent = key;
-      btn.addEventListener("click", () => pressDigit(key));
-    }
-    keypadEl.appendChild(btn);
-  });
-}
-
-function pressDigit(digit) {
-  if (state.enteredCode.length >= CONFIG.codeLength) return;
-  state.enteredCode += digit;
-  updateCodeBoxes();
-  if (state.enteredCode.length === CONFIG.codeLength) {
-    setTimeout(checkCode, 200);
+function showMascot(){
+  if (CONFIG.catPhotos.length){
+    const src = CONFIG.catPhotos[Math.floor(Math.random() * CONFIG.catPhotos.length)];
+    mascotFace.innerHTML = `<img src="${src}" alt="gatito" class="mascot-photo">`;
+  } else {
+    mascotFace.textContent = "🐱";
   }
 }
 
-function pressDelete() {
-  state.enteredCode = state.enteredCode.slice(0, -1);
-  updateCodeBoxes();
-}
-
-function checkCode() {
-  const isValid = CONFIG.accessCodes.some((code) => normalize(code) === state.enteredCode);
-
-  if (isValid) {
+function checkCode(){
+  if (enteredCode === CONFIG.accessCode){
     goTo("screen-cake");
     return;
   }
 
-  state.failCount++;
+  failCount++;
   lockCard.classList.remove("shake");
-  void lockCard.offsetWidth;
+  void lockCard.offsetWidth; // reflow para reiniciar animación
   lockCard.classList.add("shake");
-  showPetMessage();
-  updateHint();
-  state.enteredCode = "";
-  updateCodeBoxes();
+
+  const messages = [
+    "Inténtalo de nuevo, mi vida.",
+    "El sistema no te reconoce... ¿o sí, pechocho?",
+    "Nop. Intenta de nuevo, mi abejita.",
+    "Ese no era, mi amor.",
+  ];
+  showMascot();
+  mascotMsg.textContent = messages[Math.floor(Math.random() * messages.length)];
+  mascotOverlay.classList.remove("hidden");
+
+  if (failCount >= 3){
+    lockHint.textContent = "💡 Pista: piensa en el día que salimos por primera vez";
+  }
+  if (failCount >= 5){
+    lockHint.textContent += `  ·  intento #${failCount}, el FBI ya viene en camino 🚨`;
+  }
+
+  enteredCode = "";
+  updatePinDots();
 }
+
+keypad.addEventListener("click", (e) => {
+  const btn = e.target.closest(".key");
+  if (!btn || btn.disabled) return;
+
+  if (btn.id === "key-del"){
+    enteredCode = enteredCode.slice(0, -1);
+    updatePinDots();
+    return;
+  }
+
+  if (enteredCode.length >= CODE_LENGTH) return;
+  enteredCode += btn.dataset.key;
+  updatePinDots();
+
+  if (enteredCode.length === CODE_LENGTH){
+    setTimeout(checkCode, 150);
+  }
+});
 
 document.addEventListener("keydown", (e) => {
-  if (document.getElementById("screen-lock").getAttribute("data-active") !== "true") return;
-  if (e.key >= "0" && e.key <= "9") pressDigit(e.key);
-  if (e.key === "Backspace") pressDelete();
-});
-
-function showPetMessage() {
-  const msg = CONFIG.petMessages[Math.floor(Math.random() * CONFIG.petMessages.length)];
-  petMessage.textContent = msg;
-  petEmoji.style.backgroundImage = `url('${petFrames[Math.floor(Math.random() * petFrames.length)]}')`;
-  petPopup.classList.add("visible");
-  clearTimeout(showPetMessage._t);
-  showPetMessage._t = setTimeout(() => petPopup.classList.remove("visible"), 2600);
-}
-
-function updateHint() {
-  const hintsUnlocked = Math.floor(state.failCount / CONFIG.attemptsPerHint);
-  if (hintsUnlocked > 0 && hintsUnlocked <= CONFIG.hints.length) {
-    hintText.textContent = CONFIG.hints[hintsUnlocked - 1];
+  if (document.getElementById("screen-lock").dataset.active !== "true") return;
+  if (e.key >= "0" && e.key <= "9"){
+    if (enteredCode.length >= CODE_LENGTH) return;
+    enteredCode += e.key;
+    updatePinDots();
+    if (enteredCode.length === CODE_LENGTH){
+      setTimeout(checkCode, 150);
+    }
+  } else if (e.key === "Backspace"){
+    enteredCode = enteredCode.slice(0, -1);
+    updatePinDots();
   }
-}
-
-/* ============================================================
-   PASTEL
-   ============================================================ */
-const cakeBtn = document.getElementById("cake-btn");
-const cakeContinue = document.getElementById("cake-continue");
-
-cakeBtn.addEventListener("click", () => {
-  cakeBtn.classList.add("popped");
-  burstConfetti(90);
-  cakeContinue.classList.remove("btn-hidden");
 });
 
-/* ============================================================
-   MENÚ + CORAZÓN OCULTO
-   ============================================================ */
-const hiddenHeart = document.getElementById("hidden-heart");
-
-hiddenHeart.addEventListener("click", () => {
-  if (!allLevelsDone()) return;
-  goTo("screen-final");
-  renderVale();
-  burstConfetti(140);
+mascotRetry.addEventListener("click", () => {
+  mascotOverlay.classList.add("hidden");
 });
 
-function allLevelsDone() {
-  return Object.values(state.levelsDone).every(Boolean);
-}
+// ============================================================
+// PANTALLA 2: PASTEL
+// ============================================================
+const cakeButton = document.getElementById("cake-button");
+const cakeInstruction = document.getElementById("cake-instruction");
+const btnToMenu = document.getElementById("btn-to-menu");
+let cakeBlown = false;
 
-function refreshHeartState() {
-  hiddenHeart.classList.toggle("unlocked", allLevelsDone());
-}
+cakeButton.addEventListener("click", () => {
+  if (cakeBlown) return;
+  cakeBlown = true;
+  cakeButton.classList.add("blown");
+  cakeInstruction.textContent = "¡Yay! 🎉";
+  btnToMenu.classList.remove("hidden");
+  launchConfetti("confetti-cake", 1200);
+});
 
-/* ============================================================
-   GALERÍA
-   ============================================================ */
-function renderGallery() {
-  const grid = document.getElementById("gallery-grid");
-  grid.innerHTML = "";
-  CONFIG.gallery.forEach((item) => {
-    const card = document.createElement("div");
-    card.className = "polaroid";
-    card.innerHTML = `
+// ============================================================
+// GALERÍA
+// ============================================================
+function renderGallery(){
+  const grid = document.getElementById("polaroid-grid");
+  if (grid.dataset.rendered) return;
+  grid.dataset.rendered = "true";
+
+  CONFIG.photos.forEach((photo, i) => {
+    const wrap = document.createElement("div");
+    wrap.className = "polaroid";
+    wrap.innerHTML = `
       <div class="polaroid-inner">
-        <div class="polaroid-front">
-          <div class="polaroid-photo" style="${item.img ? `background-image:url('${item.img}')` : ""}"></div>
+        <div class="polaroid-face polaroid-front">
+          <div class="polaroid-photo">foto ${i + 1}</div>
+          <div class="polaroid-num">toca para voltear</div>
         </div>
-        <div class="polaroid-back">
-          <div class="polaroid-caption">${item.caption}</div>
+        <div class="polaroid-face polaroid-back">
+          <p class="polaroid-caption">${photo.caption}</p>
+          <p class="polaroid-date">${photo.date}</p>
         </div>
       </div>
     `;
-    card.addEventListener("click", () => card.classList.toggle("flipped"));
-    grid.appendChild(card);
+    wrap.addEventListener("click", () => wrap.classList.toggle("flipped"));
+    grid.appendChild(wrap);
   });
+
+  updateDaysCounter();
 }
 
-function renderDaysCounter() {
-  const el = document.getElementById("days-counter");
-  const start = new Date(CONFIG.anniversaryDate + "T00:00:00");
+function updateDaysCounter(){
   const now = new Date();
-  const diffDays = Math.max(0, Math.floor((now - start) / 86400000));
-  el.textContent = `Llevamos ${diffDays} días juntos 💜`;
+  const diff = Math.floor((now - CONFIG.anniversaryDate) / (1000 * 60 * 60 * 24));
+  document.getElementById("days-counter").textContent = diff >= 0 ? diff : "—";
 }
 
-/* ============================================================
-   MÚSICA
-   ============================================================ */
-function renderSongs() {
+// ============================================================
+// BANDA SONORA
+// ============================================================
+function renderSongs(){
   const list = document.getElementById("song-list");
-  const player = document.getElementById("song-player");
-  list.innerHTML = "";
-  CONFIG.songs.forEach((song, i) => {
-    const item = document.createElement("button");
+  if (list.dataset.rendered) return;
+  list.dataset.rendered = "true";
+
+  CONFIG.songs.forEach(song => {
+    const item = document.createElement("div");
     item.className = "song-item";
-    item.innerHTML = `<span>🎵</span><span>${song.title}</span>`;
-    item.addEventListener("click", () => {
-      document.querySelectorAll(".song-item").forEach((el) => el.classList.remove("active"));
-      item.classList.add("active");
-      player.innerHTML = `<iframe src="https://www.youtube.com/embed/${song.youtubeId}?autoplay=1" title="${song.title}" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
-    });
+    const embed = song.videoId
+      ? `<iframe src="https://www.youtube.com/embed/${song.videoId}" title="${song.title}" allowfullscreen></iframe>`
+      : `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:rgba(247,241,228,0.4);font-size:13px;">pega el link de YouTube en script.js</div>`;
+    item.innerHTML = `
+      <div class="song-embed">${embed}</div>
+      <p class="song-title">${song.title}</p>
+      <p class="song-quote">&ldquo;${song.quote}&rdquo;</p>
+    `;
     list.appendChild(item);
   });
 }
 
-/* ============================================================
-   CARTA
-   ============================================================ */
-const envelope = document.getElementById("envelope");
-const letterEl = document.getElementById("letter");
+// ============================================================
+// CARTA
+// ============================================================
+const seal = document.getElementById("seal");
+const envelopeWrap = document.getElementById("envelope-wrap");
+const letter = document.getElementById("letter");
 
-function initLetter() {
-  letterEl.textContent = CONFIG.letter;
-  envelope.addEventListener("click", () => {
-    envelope.classList.add("open");
-    setTimeout(() => letterEl.classList.add("visible"), 350);
-  });
+seal.addEventListener("click", () => {
+  envelopeWrap.classList.add("hidden");
+  letter.classList.remove("hidden");
+});
+
+// ============================================================
+// ARCADE — progreso general
+// ============================================================
+let levelsDone = { 1: false, 2: false, 3: false, 4: false };
+
+function markLevelDone(n){
+  levelsDone[n] = true;
+  document.getElementById(`check-${n}`).textContent = "✅";
+  const total = Object.values(levelsDone).filter(Boolean).length;
+  document.getElementById("progress-label").textContent = `⭐ ${total}/4 niveles completados`;
 }
 
-/* ============================================================
-   MINIJUEGO: OUTFIT
-   ============================================================ */
-function renderOutfitGame() {
-  const grid = document.getElementById("outfit-grid");
-  const feedback = document.getElementById("outfit-feedback");
-  grid.innerHTML = "";
-  feedback.textContent = state.levelsDone.outfit ? "¡Nivel completado! ✅" : "";
+// ===== Nivel 1: Outfit =====
+let outfitState = { top: null, bottom: null, shoes: null };
 
-  CONFIG.outfits.forEach((outfit) => {
-    const card = document.createElement("button");
-    card.className = "outfit-card" + (state.selectedOutfit === outfit.id ? " selected" : "");
-    card.innerHTML = `<span class="outfit-emoji">${outfit.emoji}</span><span>${outfit.label}</span>`;
-    card.addEventListener("click", () => {
-      document.querySelectorAll(".outfit-card").forEach((c) => c.classList.remove("selected"));
-      card.classList.add("selected");
-      state.selectedOutfit = outfit.id;
-      state.levelsDone.outfit = true;
-      feedback.textContent = `¡Elegiste ${outfit.label}! Nivel completado ✅`;
-      markLevelDone("outfit");
+function renderOutfit(){
+  const rows = { top: "row-top", bottom: "row-bottom", shoes: "row-shoes" };
+  Object.entries(rows).forEach(([cat, rowId]) => {
+    const row = document.getElementById(rowId);
+    if (row.dataset.rendered) return;
+    row.dataset.rendered = "true";
+    CONFIG.outfit[cat].forEach(emoji => {
+      const btn = document.createElement("button");
+      btn.className = "outfit-option";
+      btn.textContent = emoji;
+      btn.addEventListener("click", () => {
+        row.querySelectorAll(".outfit-option").forEach(b => b.classList.remove("selected"));
+        btn.classList.add("selected");
+        outfitState[cat] = emoji;
+        updateOutfitPreview();
+      });
+      row.appendChild(btn);
     });
-    grid.appendChild(card);
   });
 }
 
-/* ============================================================
-   MINIJUEGO: DECORAR PASTEL
-   ============================================================ */
-function renderDecorGame() {
-  const cake = document.getElementById("decor-cake");
-  const itemsWrap = document.getElementById("decor-items");
-  const feedback = document.getElementById("decor-feedback");
-  cake.innerHTML = "";
-  itemsWrap.innerHTML = "";
-  state.decorPlaced = 0;
-  feedback.textContent = state.levelsDone.decorar ? "Nivel ya completado ✅ (puedes seguir decorando)" : "";
+function updateOutfitPreview(){
+  const parts = [outfitState.top, outfitState.bottom, outfitState.shoes].filter(Boolean);
+  document.getElementById("outfit-preview").textContent = parts.length ? parts.join(" ") : "🧍";
+}
 
-  CONFIG.decorItems.forEach((emoji) => {
+document.getElementById("outfit-done").addEventListener("click", () => {
+  markLevelDone(1);
+  goTo("screen-arcade");
+});
+
+// ===== Nivel 2: Decora el pastel =====
+function renderCakeDecor(){
+  const picker = document.getElementById("toppings-picker");
+  if (picker.dataset.rendered) return;
+  picker.dataset.rendered = "true";
+
+  CONFIG.toppings.forEach(topping => {
     const btn = document.createElement("button");
-    btn.className = "decor-item-btn";
-    btn.textContent = emoji;
-    btn.addEventListener("click", () => {
-      placeDecoration(cake, emoji);
-      state.decorPlaced++;
-      if (state.decorPlaced >= CONFIG.decorGoal && !state.levelsDone.decorar) {
-        state.levelsDone.decorar = true;
-        feedback.textContent = "¡Pastel decorado! Nivel completado ✅";
-        markLevelDone("decorar");
-      } else if (!state.levelsDone.decorar) {
-        feedback.textContent = `Adornos colocados: ${state.decorPlaced}/${CONFIG.decorGoal}`;
-      }
-    });
-    itemsWrap.appendChild(btn);
+    btn.className = "topping-btn";
+    btn.textContent = topping;
+    btn.addEventListener("click", () => addTopping(topping));
+    picker.appendChild(btn);
   });
 }
 
-function placeDecoration(cake, emoji) {
-  const deco = document.createElement("span");
-  deco.className = "decoration";
-  deco.textContent = emoji;
-  const top = 15 + Math.random() * 70;
-  const left = 15 + Math.random() * 70;
-  deco.style.top = `${top}%`;
-  deco.style.left = `${left}%`;
-  cake.appendChild(deco);
+function addTopping(emoji){
+  const layer = document.getElementById("toppings-layer");
+  const el = document.createElement("span");
+  el.className = "topping-placed";
+  el.textContent = emoji;
+  el.style.left = `${20 + Math.random() * 60}%`;
+  el.style.top = `${10 + Math.random() * 50}%`;
+  layer.appendChild(el);
 }
 
-/* ============================================================
-   MINIJUEGO: QUIZ
-   ============================================================ */
-function renderQuizGame() {
-  document.getElementById("quiz-feedback").textContent = "";
-  document.getElementById("quiz-input").value = "";
-  if (state.levelsDone.quiz) {
-    state.quizIndex = CONFIG.quiz.length;
-  } else {
-    state.quizIndex = 0;
-  }
-  showQuizQuestion();
+document.getElementById("cake-decor-done").addEventListener("click", () => {
+  markLevelDone(2);
+  goTo("screen-arcade");
+});
+
+// ===== Nivel 3: Quiz =====
+function renderQuiz(){
+  const box = document.getElementById("quiz-box");
+  if (box.dataset.rendered) return;
+  box.dataset.rendered = "true";
+
+  CONFIG.quiz.forEach((q, i) => {
+    const div = document.createElement("div");
+    div.className = "quiz-question";
+    div.innerHTML = `
+      <p class="quiz-clue">${i + 1}. ${q.clue}</p>
+      <div class="quiz-input-row">
+        <input type="text" placeholder="Tu respuesta..." id="quiz-input-${i}">
+        <button data-i="${i}">Ver</button>
+      </div>
+      <p class="quiz-status" id="quiz-status-${i}"></p>
+    `;
+    box.appendChild(div);
+  });
+
+  box.querySelectorAll("button[data-i]").forEach(btn => {
+    btn.addEventListener("click", () => checkQuiz(Number(btn.dataset.i)));
+  });
 }
 
-function showQuizQuestion() {
-  const progress = document.getElementById("quiz-progress");
-  const questionEl = document.getElementById("quiz-question");
-  const feedback = document.getElementById("quiz-feedback");
+let quizCorrectCount = 0;
+function checkQuiz(i){
+  const input = document.getElementById(`quiz-input-${i}`);
+  const status = document.getElementById(`quiz-status-${i}`);
+  const answer = CONFIG.quiz[i].answer.trim().toLowerCase();
+  const value = input.value.trim().toLowerCase();
 
-  if (state.quizIndex >= CONFIG.quiz.length) {
-    progress.textContent = "";
-    questionEl.textContent = "¡Completaste el quiz! 🎉";
-    feedback.textContent = "Nivel completado ✅";
-    document.getElementById("quiz-form").style.display = "none";
-    state.levelsDone.quiz = true;
-    markLevelDone("quiz");
+  if (!answer){
+    status.textContent = "⚠️ Falta poner la respuesta correcta en script.js";
+    status.className = "quiz-status";
     return;
   }
 
-  document.getElementById("quiz-form").style.display = "flex";
-  progress.textContent = `Pregunta ${state.quizIndex + 1} de ${CONFIG.quiz.length}`;
-  questionEl.textContent = CONFIG.quiz[state.quizIndex].question;
-  feedback.textContent = "";
-}
-
-document.getElementById("quiz-form").addEventListener("submit", (e) => {
-  e.preventDefault();
-  const input = document.getElementById("quiz-input");
-  const feedback = document.getElementById("quiz-feedback");
-  const current = CONFIG.quiz[state.quizIndex];
-  const value = normalize(input.value);
-
-  const correct = current.answers.some((ans) => value.includes(normalize(ans)) || normalize(ans).includes(value));
-
-  if (correct && value.length > 0) {
-    state.quizIndex++;
-    input.value = "";
-    showQuizQuestion();
-  } else {
-    feedback.textContent = "No es eso... ¡intenta de nuevo!";
-  }
-});
-
-/* ============================================================
-   MINIJUEGO: ATRAPAR CORAZONES
-   ============================================================ */
-const catchField = document.getElementById("catch-field");
-const basket = document.getElementById("basket");
-const catchLeft = document.getElementById("catch-left");
-const catchRight = document.getElementById("catch-right");
-const fallingItems = [];
-
-function renderCatchGame() {
-  document.getElementById("catch-target").textContent = CONFIG.catchTarget;
-  document.getElementById("catch-score").textContent = state.catchScore;
-  document.getElementById("catch-feedback").textContent = state.levelsDone.atrapar ? "Nivel ya completado ✅" : "";
-}
-
-function startCatchGame() {
-  if (state.levelsDone.atrapar) return;
-  state.catchScore = 0;
-  state.basketX = 50;
-  basket.style.left = "50%";
-  document.getElementById("catch-score").textContent = "0";
-  fallingItems.forEach((it) => it.el.remove());
-  fallingItems.length = 0;
-  clearInterval(state.catchTimer);
-  state.catchTimer = setInterval(catchTick, CONFIG.catchSpeedMs);
-}
-
-function stopCatchGame() {
-  clearInterval(state.catchTimer);
-  state.catchTimer = null;
-}
-
-function catchTick() {
-  spawnFallingItem();
-  moveFallingItems();
-}
-
-function spawnFallingItem() {
-  const el = document.createElement("div");
-  el.className = "falling-item";
-  el.textContent = "💗";
-  const x = 5 + Math.random() * 85;
-  el.style.left = `${x}%`;
-  catchField.appendChild(el);
-  fallingItems.push({ el, x, y: -30 });
-}
-
-function moveFallingItems() {
-  const fieldHeight = catchField.clientHeight;
-  for (let i = fallingItems.length - 1; i >= 0; i--) {
-    const item = fallingItems[i];
-    item.y += 40;
-    item.el.style.top = `${item.y}px`;
-
-    if (item.y >= fieldHeight - 50) {
-      const dx = Math.abs(item.x - state.basketX);
-      if (dx < 12) {
-        state.catchScore++;
-        document.getElementById("catch-score").textContent = state.catchScore;
-        checkCatchWin();
-      }
-      item.el.remove();
-      fallingItems.splice(i, 1);
+  if (value === answer){
+    status.textContent = "✅ ¡Correcto!";
+    status.className = "quiz-status correct";
+    quizCorrectCount++;
+    if (quizCorrectCount >= Math.ceil(CONFIG.quiz.length * 0.75)){
+      markLevelDone(3);
     }
+  } else {
+    status.textContent = "❌ No es esa... intenta otra vez";
+    status.className = "quiz-status wrong";
   }
 }
 
-function moveBasket(delta) {
-  state.basketX = Math.min(95, Math.max(5, state.basketX + delta));
-  basket.style.left = `${state.basketX}%`;
+// ===== Nivel 4: Atrapa los besos =====
+const kissGame = document.getElementById("kiss-game");
+const kissPlayer = document.getElementById("kiss-player");
+const kissStart = document.getElementById("kiss-start");
+const kissScoreEl = document.getElementById("kiss-score");
+const kissTimeEl = document.getElementById("kiss-time");
+
+let kissPlaying = false;
+let kissScore = 0;
+let kissTimeLeft = 20;
+let kissPlayerX = 50; // porcentaje
+let kissInterval, kissSpawnInterval, kissTimerInterval;
+
+function startKissGame(){
+  if (kissPlaying) return;
+  kissPlaying = true;
+  kissScore = 0;
+  kissTimeLeft = 20;
+  kissPlayerX = 50;
+  kissScoreEl.textContent = "Puntos: 0";
+  kissTimeEl.textContent = "Tiempo: 20";
+  kissGame.querySelectorAll(".kiss-item").forEach(el => el.remove());
+  kissStart.classList.add("hidden");
+
+  kissSpawnInterval = setInterval(spawnKissItem, 700);
+  kissInterval = setInterval(moveKissItems, 50);
+  kissTimerInterval = setInterval(() => {
+    kissTimeLeft--;
+    kissTimeEl.textContent = `Tiempo: ${kissTimeLeft}`;
+    if (kissTimeLeft <= 0) endKissGame();
+  }, 1000);
 }
 
-catchLeft.addEventListener("click", () => moveBasket(-10));
-catchRight.addEventListener("click", () => moveBasket(10));
+function spawnKissItem(){
+  const el = document.createElement("div");
+  el.className = "kiss-item";
+  el.textContent = CONFIG.kissPhrases[Math.floor(Math.random() * CONFIG.kissPhrases.length)];
+  el.style.left = `${Math.random() * 85}%`;
+  el.style.top = "0px";
+  el.dataset.y = "0";
+  kissGame.appendChild(el);
+}
+
+function moveKissItems(){
+  const items = kissGame.querySelectorAll(".kiss-item");
+  const gameHeight = kissGame.clientHeight;
+  items.forEach(el => {
+    let y = parseFloat(el.dataset.y) + 5;
+    el.dataset.y = y;
+    el.style.top = `${y}px`;
+
+    if (y > gameHeight - 50){
+      const itemLeft = parseFloat(el.style.left);
+      if (Math.abs(itemLeft - kissPlayerX) < 12){
+        kissScore++;
+        kissScoreEl.textContent = `Puntos: ${kissScore}`;
+      }
+      el.remove();
+    }
+  });
+}
+
+function endKissGame(){
+  clearInterval(kissSpawnInterval);
+  clearInterval(kissInterval);
+  clearInterval(kissTimerInterval);
+  kissPlaying = false;
+  kissGame.querySelectorAll(".kiss-item").forEach(el => el.remove());
+  kissStart.textContent = `¡${kissScore} atrapados! Jugar de nuevo`;
+  kissStart.classList.remove("hidden");
+  if (kissScore >= 5) markLevelDone(4);
+}
+
+kissStart.addEventListener("click", startKissGame);
 
 document.addEventListener("keydown", (e) => {
-  if (document.getElementById("screen-game-atrapar").getAttribute("data-active") !== "true") return;
-  if (e.key === "ArrowLeft") moveBasket(-10);
-  if (e.key === "ArrowRight") moveBasket(10);
+  if (!kissPlaying) return;
+  if (e.key === "ArrowLeft") kissPlayerX = Math.max(5, kissPlayerX - 8);
+  if (e.key === "ArrowRight") kissPlayerX = Math.min(90, kissPlayerX + 8);
+  kissPlayer.style.left = `${kissPlayerX}%`;
 });
 
-function checkCatchWin() {
-  if (state.catchScore >= CONFIG.catchTarget && !state.levelsDone.atrapar) {
-    state.levelsDone.atrapar = true;
-    document.getElementById("catch-feedback").textContent = "¡Nivel completado! ✅";
-    stopCatchGame();
-    markLevelDone("atrapar");
-  }
-}
+// soporte táctil: deslizar sobre el juego mueve al monito
+kissGame.addEventListener("touchmove", (e) => {
+  if (!kissPlaying) return;
+  const rect = kissGame.getBoundingClientRect();
+  const touchX = e.touches[0].clientX - rect.left;
+  kissPlayerX = Math.min(90, Math.max(5, (touchX / rect.width) * 100));
+  kissPlayer.style.left = `${kissPlayerX}%`;
+  e.preventDefault();
+}, { passive: false });
 
-/* ============================================================
-   PROGRESO DE NIVELES
-   ============================================================ */
-function markLevelDone(key) {
-  const check = document.querySelector(`[data-check="${key}"]`);
-  if (check) check.classList.add("done");
-  refreshHeartState();
-}
+// ============================================================
+// FINAL
+// ============================================================
+document.getElementById("btn-to-final").addEventListener("click", () => {
+  goTo("screen-final");
+  launchConfetti("confetti-final", 2200);
+});
 
-/* ============================================================
-   FINAL / VALE
-   ============================================================ */
-function renderVale() {
-  document.getElementById("vale-box").textContent = CONFIG.valeText;
-}
+const finalHeart = document.getElementById("final-heart");
+const finalHint = document.getElementById("final-hint");
+const vale = document.getElementById("vale");
 
-/* ============================================================
-   CONFETI (canvas, sin librerías)
-   ============================================================ */
-const canvas = document.getElementById("confetti-canvas");
-const ctx = canvas.getContext("2d");
-let confettiParticles = [];
-let confettiRunning = false;
+finalHeart.addEventListener("click", () => {
+  vale.classList.remove("hidden");
+  finalHint.classList.add("hidden");
+  document.getElementById("vale-text").textContent = CONFIG.valeText;
+});
 
-function resizeCanvas() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-}
-window.addEventListener("resize", resizeCanvas);
-resizeCanvas();
+// ============================================================
+// CONFETI (canvas simple, sin librerías)
+// ============================================================
+function launchConfetti(canvasId, duration){
+  const canvas = document.getElementById(canvasId);
+  const ctx = canvas.getContext("2d");
+  const parent = canvas.parentElement;
+  canvas.width = parent.clientWidth;
+  canvas.height = parent.clientHeight;
 
-const confettiColors = ["#ff6fa5", "#b46eff", "#ffd166", "#ffffff", "#ff9ecb"];
+  const colors = ["#FF7A93", "#F2B84B", "#F7F1E4", "#7CD9A8"];
+  const pieces = Array.from({ length: 90 }, () => ({
+    x: Math.random() * canvas.width,
+    y: -20 - Math.random() * canvas.height,
+    r: 4 + Math.random() * 4,
+    color: colors[Math.floor(Math.random() * colors.length)],
+    speed: 2 + Math.random() * 3,
+    drift: (Math.random() - 0.5) * 2,
+    rotation: Math.random() * 360,
+  }));
 
-function burstConfetti(count = 80) {
-  for (let i = 0; i < count; i++) {
-    confettiParticles.push({
-      x: Math.random() * canvas.width,
-      y: -20 - Math.random() * canvas.height * 0.3,
-      size: 6 + Math.random() * 6,
-      color: confettiColors[Math.floor(Math.random() * confettiColors.length)],
-      speedY: 2 + Math.random() * 3,
-      speedX: -1.5 + Math.random() * 3,
-      rotation: Math.random() * 360,
-      rotationSpeed: -6 + Math.random() * 12,
-      life: 0,
-      maxLife: 260 + Math.random() * 120
+  const start = performance.now();
+
+  function frame(now){
+    const elapsed = now - start;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    pieces.forEach(p => {
+      p.y += p.speed;
+      p.x += p.drift;
+      p.rotation += 4;
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate((p.rotation * Math.PI) / 180);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.r / 2, -p.r / 2, p.r, p.r * 1.6);
+      ctx.restore();
     });
+    if (elapsed < duration){
+      requestAnimationFrame(frame);
+    } else {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
   }
-  if (!confettiRunning) {
-    confettiRunning = true;
-    requestAnimationFrame(animateConfetti);
-  }
+  requestAnimationFrame(frame);
 }
-
-function animateConfetti() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  confettiParticles.forEach((p) => {
-    p.x += p.speedX;
-    p.y += p.speedY;
-    p.rotation += p.rotationSpeed;
-    p.life++;
-
-    ctx.save();
-    ctx.translate(p.x, p.y);
-    ctx.rotate((p.rotation * Math.PI) / 180);
-    ctx.fillStyle = p.color;
-    ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
-    ctx.restore();
-  });
-
-  confettiParticles = confettiParticles.filter(
-    (p) => p.life < p.maxLife && p.y < canvas.height + 40
-  );
-
-  if (confettiParticles.length > 0) {
-    requestAnimationFrame(animateConfetti);
-  } else {
-    confettiRunning = false;
-  }
-}
-
-/* ============================================================
-   INIT
-   ============================================================ */
-function init() {
-  renderCodeBoxes();
-  renderKeypad();
-  renderGallery();
-  renderDaysCounter();
-  renderSongs();
-  initLetter();
-  renderOutfitGame();
-  renderDecorGame();
-  renderQuizGame();
-  renderCatchGame();
-
-  document.getElementById("screen-arcade").querySelectorAll(".game-card").forEach((card) => {
-    const level = card.getAttribute("data-level");
-    card.addEventListener("click", () => {
-      if (level === "outfit") renderOutfitGame();
-      if (level === "decorar") renderDecorGame();
-      if (level === "quiz") renderQuizGame();
-      if (level === "atrapar") renderCatchGame();
-    });
-  });
-
-  refreshHeartState();
-}
-
-init();

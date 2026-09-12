@@ -2,177 +2,288 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<title>Feliz Cumpleaños amor de mi vida 💜</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Feliz cumpleaños mi vida</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <div class="stage">
 
-  <canvas id="confetti-canvas"></canvas>
-
-  <!-- PANTALLA: CANDADO -->
+  <!-- ================= PANTALLA 1: ENTRADA / CANDADO ================= -->
   <section class="screen" id="screen-lock" data-active="true">
     <div class="lock-card">
-      <h1 class="title">Ingresa el código</h1>
-      <div class="code-boxes" id="code-boxes"></div>
-      <p class="hint-text" id="hint-text"></p>
-      <div class="keypad" id="keypad"></div>
+      <p class="eyebrow">Verificación de identidad</p>
+      <h1 class="lock-title">Acceso restringido</h1>
+      <p class="lock-copy">Ingresa el código de acceso para continuar.</p>
+
+      <div class="pin-dots" id="pin-dots">
+        <span class="pin-dot" data-i="0">♡</span>
+        <span class="pin-dot" data-i="1">♡</span>
+        <span class="pin-dot" data-i="2">♡</span>
+        <span class="pin-dot" data-i="3">♡</span>
+      </div>
+
+      <p class="lock-hint" id="lock-hint"></p>
+
+      <div class="keypad" id="keypad">
+        <button class="key" type="button" data-key="1">1</button>
+        <button class="key" type="button" data-key="2">2</button>
+        <button class="key" type="button" data-key="3">3</button>
+        <button class="key" type="button" data-key="4">4</button>
+        <button class="key" type="button" data-key="5">5</button>
+        <button class="key" type="button" data-key="6">6</button>
+        <button class="key" type="button" data-key="7">7</button>
+        <button class="key" type="button" data-key="8">8</button>
+        <button class="key" type="button" data-key="9">9</button>
+        <button class="key key-ghost" type="button" disabled aria-hidden="true">♥</button>
+        <button class="key" type="button" data-key="0">0</button>
+        <button class="key key-del" type="button" id="key-del" aria-label="Borrar">⌫</button>
+      </div>
     </div>
 
-    <div class="pet-popup" id="pet-popup">
-      <div class="pet-emoji" id="pet-emoji"></div>
-      <p class="pet-message" id="pet-message"></p>
+    <div class="mascot-overlay hidden" id="mascot-overlay">
+      <div class="mascot-card">
+        <div class="mascot-face" id="mascot-face"></div>
+        <p class="mascot-title">Código incorrecto</p>
+        <p class="mascot-msg" id="mascot-msg">Inténtalo de nuevo, mi amor</p>
+        <button class="mascot-retry" id="mascot-retry">Reintentar</button>
+      </div>
     </div>
   </section>
 
-  <!-- PANTALLA: PASTEL -->
+  <!-- ================= PANTALLA 2: PASTEL ================= -->
   <section class="screen" id="screen-cake" data-active="false">
-    <h1 class="title">¡Feliz Cumpleaños! 🎉</h1>
-    <p class="subtitle">Toca el pastel para pedir un deseo</p>
-    <button class="cake" id="cake-btn" aria-label="Pastel de cumpleaños">
-      <span class="cake-emoji">🎂</span>
-    </button>
-    <button class="btn btn-primary btn-hidden" id="cake-continue">Vamos al menú ➜</button>
+    <div class="cake-wrap">
+      <p class="eyebrow">identidad confirmada</p>
+      <h1 class="cake-title">¡Feliz cumpleaños!</h1>
+      <p class="cake-copy">Bienvenido, pechocho. Esto es solo el principio de lo que preparé para ti&hellip;</p>
+
+      <button class="cake" id="cake-button" aria-label="Soplar las velas">
+        <span class="cake-emoji">🎂</span>
+      </button>
+      <p class="cake-instruction" id="cake-instruction">Toca el pastel para soplar las velas</p>
+
+      <button class="btn-primary hidden" id="btn-to-menu" data-target="screen-menu">Entrar al panel →</button>
+    </div>
+    <canvas id="confetti-cake" class="confetti-layer"></canvas>
   </section>
 
-  <!-- PANTALLA: MENÚ -->
+  <!-- ================= PANTALLA 3: MENU ================= -->
   <section class="screen" id="screen-menu" data-active="false">
-    <h1 class="title">¿Qué quieres ver? 💌</h1>
-    <div class="menu-grid">
-      <button class="menu-card" data-goto="screen-galeria">
-        <span class="menu-icon">📸</span>
-        <span>Galería</span>
-      </button>
-      <button class="menu-card" data-goto="screen-musica">
-        <span class="menu-icon">🎵</span>
-        <span>Música</span>
-      </button>
-      <button class="menu-card" data-goto="screen-carta">
-        <span class="menu-icon">💌</span>
-        <span>Carta</span>
-      </button>
-      <button class="menu-card" data-goto="screen-arcade">
-        <span class="menu-icon">🕹️</span>
-        <span>Arcade</span>
-      </button>
+    <div class="menu-wrap">
+      <p class="eyebrow">panel de misiones</p>
+      <h1 class="menu-title">Elige tu destino, mi vida</h1>
+      <p class="menu-subtitle">Toca cada tarjeta para abrir tu sorpresa</p>
+
+      <div class="menu-grid">
+        <button class="menu-card" data-target="screen-galeria">
+          <span class="menu-ribbon">🎀</span>
+          <span class="menu-emoji">📸</span>
+          <span class="menu-label">Nuestra galería</span>
+        </button>
+        <button class="menu-card" data-target="screen-musica">
+          <span class="menu-ribbon">🎀</span>
+          <span class="menu-emoji">🎵</span>
+          <span class="menu-label">Nuestra banda sonora</span>
+        </button>
+        <button class="menu-card" data-target="screen-carta">
+          <span class="menu-ribbon">🎀</span>
+          <span class="menu-emoji">💌</span>
+          <span class="menu-label">La carta</span>
+        </button>
+        <button class="menu-card" data-target="screen-arcade">
+          <span class="menu-ribbon">🎀</span>
+          <span class="menu-emoji">🕹️</span>
+          <span class="menu-label">Zona arcade</span>
+        </button>
+      </div>
+
+      <button class="btn-final" id="btn-to-final">Ir al final →</button>
     </div>
-    <button class="hidden-heart" id="hidden-heart" title="???">💗</button>
   </section>
 
-  <!-- PANTALLA: GALERÍA -->
+  <!-- ================= GALERIA ================= -->
   <section class="screen" id="screen-galeria" data-active="false">
-    <button class="btn-back" data-goto="screen-menu">← Volver</button>
-    <h1 class="title">Nuestros momentos</h1>
-    <p class="days-counter" id="days-counter"></p>
-    <div class="gallery-grid" id="gallery-grid"></div>
+    <header class="subheader">
+      <button class="btn-back" data-target="screen-menu">← Volver</button>
+      <h2>📸 Nuestra galería</h2>
+    </header>
+    <p class="section-intro">Cada foto es un pedacito de nosotros. Toca cada una para voltearla.</p>
+
+    <div class="polaroid-grid" id="polaroid-grid">
+      <!-- generado por JS -->
+    </div>
+
+    <div class="counter-box">
+      <p class="counter-label">Llevamos juntos</p>
+      <p class="counter-number" id="days-counter">—</p>
+      <p class="counter-sub">días desde que somos novios 💫</p>
+    </div>
   </section>
 
-  <!-- PANTALLA: MÚSICA -->
+  <!-- ================= MUSICA ================= -->
   <section class="screen" id="screen-musica" data-active="false">
-    <button class="btn-back" data-goto="screen-menu">← Volver</button>
-    <h1 class="title">Nuestras canciones</h1>
-    <div class="song-list" id="song-list"></div>
-    <div class="song-player" id="song-player"></div>
+    <header class="subheader">
+      <button class="btn-back" data-target="screen-menu">← Volver</button>
+      <h2>🎵 Nuestra banda sonora</h2>
+    </header>
+    <p class="section-intro">Estas son las canciones que ya son nuestras.</p>
+
+    <div class="song-list" id="song-list">
+      <!-- generado por JS -->
+    </div>
   </section>
 
-  <!-- PANTALLA: CARTA -->
+  <!-- ================= CARTA ================= -->
   <section class="screen" id="screen-carta" data-active="false">
-    <button class="btn-back" data-goto="screen-menu">← Volver</button>
-    <h1 class="title">Una carta para ti</h1>
-    <div class="envelope" id="envelope">
-      <div class="envelope-flap"></div>
-      <div class="envelope-seal">💜</div>
-      <div class="envelope-body"></div>
+    <header class="subheader">
+      <button class="btn-back" data-target="screen-menu">← Volver</button>
+      <h2>💌 La carta</h2>
+    </header>
+
+    <div class="envelope-wrap" id="envelope-wrap">
+      <div class="envelope" id="envelope">
+        <div class="seal" id="seal">♡</div>
+        <p class="envelope-copy">Toca el sello para abrir</p>
+      </div>
     </div>
-    <div class="letter" id="letter"></div>
+
+    <article class="letter hidden" id="letter">
+      <p class="letter-heading">Para ti, pechocho</p>
+      <p>Mi vida,</p>
+      <p>Hoy es un día muy especial, y no solo porque es tu cumpleaños &mdash; es especial porque es un día más que tengo la suerte de compartir contigo. Cada año que cumples es una razón más para celebrar todo lo que eres: tu forma de reír, de cuidarme, de hacer que hasta los días más normales se sientan bonitos contigo cerca.</p>
+      <p class="letter-placeholder">[aquí va el recuerdo especial del último año]</p>
+      <p>Quiero que sepas que no me imagino celebrando esto con nadie más. Quiero celebrar mil cumpleaños más contigo, mi amor &mdash; verte crecer, cumplir años, cumplir sueños, y estar ahí en cada uno de esos días, aplaudiéndote y queriéndote cada vez más.</p>
+      <p>Te deseo un año lleno de todo lo bueno: salud, risas, logros, y muchísimo amor &mdash; el que ya tienes de mí, y el que se sigue sumando cada día.</p>
+      <p>Feliz cumpleaños, pechocho. Gracias por existir y por dejarme ser parte de tu historia.</p>
+      <p class="letter-signature">Te amo con todo,<br>Tu abejita 🐝</p>
+    </article>
   </section>
 
-  <!-- PANTALLA: ARCADE MENÚ -->
+  <!-- ================= ARCADE ================= -->
   <section class="screen" id="screen-arcade" data-active="false">
-    <button class="btn-back" data-goto="screen-menu">← Volver</button>
-    <h1 class="title">Arcade del amor</h1>
-    <p class="subtitle">Completa los 4 niveles</p>
-    <div class="menu-grid">
-      <button class="menu-card game-card" data-goto="screen-game-outfit" data-level="outfit">
-        <span class="menu-icon">👕</span>
-        <span>Elige el look</span>
-        <span class="check" data-check="outfit"></span>
+    <header class="subheader">
+      <button class="btn-back" data-target="screen-menu">← Volver</button>
+      <h2>🕹️ Zona arcade</h2>
+    </header>
+    <p class="section-intro">Completa las 4 pruebas para desbloquear tu premio final.</p>
+
+    <div class="progress-bar">
+      <span id="progress-label">⭐ 0/4 niveles completados</span>
+    </div>
+
+    <div class="arcade-grid">
+      <button class="arcade-card" data-target="screen-game-outfit">
+        <span class="arcade-num" data-level="1">1</span>
+        <span>Vístenos para la cita</span>
+        <span class="arcade-check" id="check-1"></span>
       </button>
-      <button class="menu-card game-card" data-goto="screen-game-decorar" data-level="decorar">
-        <span class="menu-icon">🎂</span>
+      <button class="arcade-card" data-target="screen-game-cake">
+        <span class="arcade-num" data-level="2">2</span>
         <span>Decora el pastel</span>
-        <span class="check" data-check="decorar"></span>
+        <span class="arcade-check" id="check-2"></span>
       </button>
-      <button class="menu-card game-card" data-goto="screen-game-quiz" data-level="quiz">
-        <span class="menu-icon">❓</span>
-        <span>Quiz de nosotros</span>
-        <span class="check" data-check="quiz"></span>
+      <button class="arcade-card" data-target="screen-game-quiz">
+        <span class="arcade-num" data-level="3">3</span>
+        <span>Adivina y gana</span>
+        <span class="arcade-check" id="check-3"></span>
       </button>
-      <button class="menu-card game-card" data-goto="screen-game-atrapar" data-level="atrapar">
-        <span class="menu-icon">🧺</span>
-        <span>Atrapa corazones</span>
-        <span class="check" data-check="atrapar"></span>
+      <button class="arcade-card" data-target="screen-game-kisses">
+        <span class="arcade-num" data-level="4">4</span>
+        <span>Atrapa los besos</span>
+        <span class="arcade-check" id="check-4"></span>
       </button>
     </div>
   </section>
 
-  <!-- MINIJUEGO: OUTFIT -->
+  <!-- ===== Nivel 1: Outfit ===== -->
   <section class="screen" id="screen-game-outfit" data-active="false">
-    <button class="btn-back" data-goto="screen-arcade">← Volver</button>
-    <h1 class="title">Elige el look</h1>
-    <p class="subtitle">¿Cuál look te queda mejor hoy?</p>
-    <div class="outfit-grid" id="outfit-grid"></div>
-    <p class="game-feedback" id="outfit-feedback"></p>
+    <header class="subheader">
+      <button class="btn-back" data-target="screen-arcade">← Volver</button>
+      <h2>Nivel 1 · Vístenos</h2>
+    </header>
+    <p class="section-intro">Elige el outfit perfecto para nuestra próxima cita.</p>
+
+    <div class="outfit-preview" id="outfit-preview">🧍</div>
+
+    <div class="outfit-picker">
+      <div class="outfit-row" id="row-top"></div>
+      <div class="outfit-row" id="row-bottom"></div>
+      <div class="outfit-row" id="row-shoes"></div>
+    </div>
+
+    <button class="btn-primary" id="outfit-done">Listo, ¡nos vamos!</button>
   </section>
 
-  <!-- MINIJUEGO: DECORAR PASTEL -->
-  <section class="screen" id="screen-game-decorar" data-active="false">
-    <button class="btn-back" data-goto="screen-arcade">← Volver</button>
-    <h1 class="title">Decora el pastel</h1>
-    <p class="subtitle">Toca los adornos para agregarlos</p>
-    <div class="decor-cake" id="decor-cake"></div>
-    <div class="decor-items" id="decor-items"></div>
-    <p class="game-feedback" id="decor-feedback"></p>
+  <!-- ===== Nivel 2: Decora el pastel ===== -->
+  <section class="screen" id="screen-game-cake" data-active="false">
+    <header class="subheader">
+      <button class="btn-back" data-target="screen-arcade">← Volver</button>
+      <h2>Nivel 2 · Decora el pastel</h2>
+    </header>
+    <p class="section-intro">Toca los ingredientes para ponerlos en el pastel.</p>
+
+    <div class="decor-cake-wrap">
+      <div class="decor-cake" id="decor-cake">🎂</div>
+      <div class="toppings-layer" id="toppings-layer"></div>
+    </div>
+
+    <div class="toppings-picker" id="toppings-picker"></div>
+
+    <button class="btn-primary" id="cake-decor-done">¡Ya quedó perfecto!</button>
   </section>
 
-  <!-- MINIJUEGO: QUIZ -->
+  <!-- ===== Nivel 3: Quiz / pistas ===== -->
   <section class="screen" id="screen-game-quiz" data-active="false">
-    <button class="btn-back" data-goto="screen-arcade">← Volver</button>
-    <h1 class="title">Quiz de nosotros</h1>
-    <p class="quiz-progress" id="quiz-progress"></p>
-    <p class="quiz-question" id="quiz-question"></p>
-    <form id="quiz-form" autocomplete="off">
-      <input type="text" id="quiz-input" class="lock-input" placeholder="Tu respuesta" />
-      <button type="submit" class="btn btn-primary">Responder</button>
-    </form>
-    <p class="game-feedback" id="quiz-feedback"></p>
+    <header class="subheader">
+      <button class="btn-back" data-target="screen-arcade">← Volver</button>
+      <h2>Nivel 3 · Adivina y gana</h2>
+    </header>
+    <p class="section-intro">Responde las pistas de nuestra historia.</p>
+
+    <div class="quiz-box" id="quiz-box"></div>
   </section>
 
-  <!-- MINIJUEGO: ATRAPAR CORAZONES -->
-  <section class="screen" id="screen-game-atrapar" data-active="false">
-    <button class="btn-back" data-goto="screen-arcade">← Volver</button>
-    <h1 class="title">Atrapa corazones</h1>
-    <p class="subtitle">Puntos: <span id="catch-score">0</span> / <span id="catch-target"></span></p>
-    <div class="catch-field" id="catch-field">
-      <div class="basket" id="basket">🧺</div>
+  <!-- ===== Nivel 4: Atrapa los besos ===== -->
+  <section class="screen" id="screen-game-kisses" data-active="false">
+    <header class="subheader">
+      <button class="btn-back" data-target="screen-arcade">← Volver</button>
+      <h2>Nivel 4 · Atrapa los besos</h2>
+    </header>
+    <p class="section-intro">Usa las flechas ← → (o desliza el dedo) para mover al monito.</p>
+
+    <div class="kiss-hud">
+      <span id="kiss-score">Puntos: 0</span>
+      <span id="kiss-time">Tiempo: 20</span>
     </div>
-    <div class="catch-controls">
-      <button class="btn btn-secondary" id="catch-left">◀</button>
-      <button class="btn btn-secondary" id="catch-right">▶</button>
+
+    <div class="kiss-game" id="kiss-game">
+      <div class="kiss-player" id="kiss-player">😊</div>
     </div>
-    <p class="game-feedback" id="catch-feedback"></p>
+
+    <button class="btn-primary hidden" id="kiss-start">Empezar</button>
   </section>
 
-  <!-- PANTALLA FINAL -->
+  <!-- ================= FINAL ================= -->
   <section class="screen" id="screen-final" data-active="false">
-    <h1 class="title">¡Lo lograste! 🎉</h1>
-    <p class="subtitle">Feliz cumpleaños, te amo 💜</p>
-    <div class="vale-box" id="vale-box"></div>
+    <canvas id="confetti-final" class="confetti-layer"></canvas>
+    <div class="final-wrap">
+      <h1 class="final-title">Feliz cumpleaños,<br>mi amor</h1>
+      <p class="final-copy">Gracias por ser mi persona favorita en este mundo. Te amo. 💕</p>
+
+      <button class="final-heart" id="final-heart" aria-label="Encuentra el corazón secreto">💗</button>
+      <p class="final-hint" id="final-hint">Hay algo escondido por aquí&hellip;</p>
+
+      <div class="vale hidden" id="vale">
+        <p class="vale-eyebrow">vale canjeable</p>
+        <p class="vale-por">Por: <span id="vale-text">[completa tu sorpresa aquí]</span></p>
+        <p class="vale-valid">Válido cuando tú quieras, mi amor</p>
+      </div>
+    </div>
   </section>
 
 </div>
