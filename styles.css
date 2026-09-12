@@ -141,17 +141,17 @@ button{
 .keypad{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  gap: 14px;
   margin: 26px auto 0;
-  max-width: 280px;
+  max-width: 320px;
 }
 
 .key{
   background: var(--night-2);
   border: 1px solid var(--night-3);
-  border-radius: 16px;
-  padding: 18px 0;
-  font-size: 22px;
+  border-radius: 18px;
+  padding: 24px 0;
+  font-size: 26px;
   font-weight: 600;
   font-family: var(--font-serif);
   color: var(--cream);
@@ -161,14 +161,11 @@ button{
   background: var(--night-3);
 }
 .key-ghost{
-  background: transparent;
-  border: none;
   color: var(--rose);
-  font-size: 20px;
   pointer-events: none;
 }
 .key-del{
-  font-size: 18px;
+  font-size: 20px;
   color: var(--rose-soft);
 }
 
