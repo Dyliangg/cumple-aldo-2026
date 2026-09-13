@@ -212,7 +212,7 @@ cakeButton.addEventListener("click", () => {
   if (cakeBlown) return;
   cakeBlown = true;
   cakeButton.classList.add("blown");
-  cakeInstruction.textContent = "¡Yay! 🎉";
+  cakeInstruction.classList.add("hidden");
   btnToMenu.classList.remove("hidden");
   launchConfetti("confetti-cake", 1200);
 });
