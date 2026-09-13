@@ -70,6 +70,11 @@ button{
   margin: 0 0 6px;
   font-weight: 500;
 }
+.eyebrow-lg{
+  font-size: 20px;
+  font-family: var(--font-serif);
+  font-style: italic;
+}
 
 /* ===== Lock screen ===== */
 #screen-lock{ justify-content: center; align-items: center; text-align: center; }
@@ -250,14 +255,7 @@ button{
   font-family: var(--font-serif);
   font-size: 34px;
   font-weight: 600;
-  margin: 4px 0 14px;
-}
-
-.cake-copy{
-  font-size: 15px;
-  color: rgba(247,241,228,0.8);
-  line-height: 1.5;
-  margin-bottom: 28px;
+  margin: 4px 0 28px;
 }
 
 .cake{
