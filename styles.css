@@ -314,7 +314,7 @@ button{
   background: var(--night-2);
   border: 1px solid var(--night-3);
   border-radius: var(--radius-md);
-  padding: 26px 12px;
+  padding: 32px 12px 22px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -322,19 +322,61 @@ button{
   color: var(--cream);
   transition: border-color 0.15s ease, transform 0.15s ease;
   position: relative;
+  overflow: hidden;
 }
+.menu-card::before{
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 50%;
+  width: 16px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, var(--gold), var(--rose));
+  opacity: 0.5;
+}
+.menu-card::after{
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  top: 46px;
+  height: 16px;
+  background: linear-gradient(90deg, var(--gold), var(--rose));
+  opacity: 0.5;
+}
+.menu-card > *{ position: relative; z-index: 1; }
 .menu-card:active{ transform: scale(0.97); }
 .menu-card:hover{ border-color: var(--rose); }
 
 .menu-ribbon{
   position: absolute;
-  top: 10px;
-  right: 12px;
-  font-size: 16px;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 28px;
+  z-index: 2;
 }
 
-.menu-emoji{ font-size: 30px; }
+.menu-emoji{ font-size: 30px; margin-top: 6px; }
 .menu-label{ font-size: 14px; font-weight: 500; }
+
+@keyframes gift-pop{
+  0%{ transform: scale(1) rotate(0deg); filter: brightness(1); }
+  35%{ transform: scale(1.1) rotate(-3deg); filter: brightness(1.3); }
+  65%{ transform: scale(0.94) rotate(3deg); filter: brightness(1.1); }
+  100%{ transform: scale(1.2) rotate(0deg); opacity: 0; filter: brightness(1.4); }
+}
+.menu-card.opening{
+  animation: gift-pop 0.42s ease forwards;
+  pointer-events: none;
+  z-index: 5;
+}
+@keyframes bow-fly{
+  0%{ transform: translateX(-50%) translateY(0) rotate(0deg); opacity: 1; }
+  100%{ transform: translateX(-50%) translateY(-26px) rotate(50deg); opacity: 0; }
+}
+.menu-card.opening .menu-ribbon{
+  animation: bow-fly 0.42s ease forwards;
+}
 
 .btn-final{
   margin-top: 36px;

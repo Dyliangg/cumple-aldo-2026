@@ -93,8 +93,21 @@ function goTo(id){
   if (id === "screen-game-quiz") renderQuiz();
 }
 
-document.querySelectorAll("[data-target]").forEach(el => {
+document.querySelectorAll("[data-target]:not(.menu-card)").forEach(el => {
   el.addEventListener("click", () => goTo(el.dataset.target));
+});
+
+// Las tarjetas del menú principal son "regalos": se abren con una animación
+// antes de llevarte a la sección.
+document.querySelectorAll(".menu-card").forEach(card => {
+  card.addEventListener("click", () => {
+    if (card.classList.contains("opening")) return;
+    card.classList.add("opening");
+    setTimeout(() => {
+      goTo(card.dataset.target);
+      card.classList.remove("opening");
+    }, 420);
+  });
 });
 
 // ============================================================
