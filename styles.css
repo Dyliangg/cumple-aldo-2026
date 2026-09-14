@@ -70,6 +70,11 @@ button{
   margin: 0 0 6px;
   font-weight: 500;
 }
+.eyebrow-lg{
+  font-size: 20px;
+  font-family: var(--font-serif);
+  font-style: italic;
+}
 
 /* ===== Lock screen ===== */
 #screen-lock{ justify-content: center; align-items: center; text-align: center; }
@@ -240,6 +245,34 @@ button{
   font-weight: 600;
 }
 .mascot-retry:active{ transform: scale(0.96); }
+
+/* ===== Cake screen ===== */
+#screen-cake{ justify-content: center; align-items: center; text-align: center; }
+
+.cake-wrap{ max-width: 340px; position: relative; z-index: 2; }
+
+.cake-title{
+  font-family: var(--font-serif);
+  font-size: 34px;
+  font-weight: 600;
+  margin: 4px 0 28px;
+}
+
+.cake{
+  background: none;
+  border: none;
+  font-size: 96px;
+  line-height: 1;
+  transition: transform 0.15s ease;
+}
+.cake:active{ transform: scale(0.92); }
+.cake.blown .cake-emoji{ filter: grayscale(0.3); }
+
+.cake-instruction{
+  font-size: 13px;
+  color: rgba(247,241,228,0.55);
+  margin-top: 10px;
+}
 
 .btn-primary{
   margin-top: 24px;
