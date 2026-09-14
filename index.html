@@ -55,7 +55,7 @@
     </div>
   </section>
 
-  <!-- ================= PANTALLA 2: PASTEL ================= -->
+  <!-- ================= PANTALLA 2: PASTEL + REGALOS ================= -->
   <section class="screen" id="screen-cake" data-active="false">
     <div class="cake-wrap">
       <p class="eyebrow eyebrow-lg">Identidad confirmada</p>
@@ -65,15 +65,9 @@
         <span class="cake-emoji">🎂</span>
       </button>
       <p class="cake-instruction" id="cake-instruction">Toca el pastel para soplar las velas</p>
-
-      <button class="btn-primary hidden" id="btn-to-menu" data-target="screen-menu">Entrar al panel →</button>
     </div>
-    <canvas id="confetti-cake" class="confetti-layer"></canvas>
-  </section>
 
-  <!-- ================= PANTALLA 3: MENU ================= -->
-  <section class="screen" id="screen-menu" data-active="false">
-    <div class="menu-wrap">
+    <div class="menu-wrap hidden" id="gift-menu">
       <p class="eyebrow">panel de misiones</p>
       <h1 class="menu-title">Elige tu destino, mi vida</h1>
       <p class="menu-subtitle">Toca cada tarjeta para abrir tu sorpresa</p>
@@ -103,12 +97,13 @@
 
       <button class="btn-final" id="btn-to-final">Ir al final →</button>
     </div>
+    <canvas id="confetti-cake" class="confetti-layer"></canvas>
   </section>
 
   <!-- ================= GALERIA ================= -->
   <section class="screen" id="screen-galeria" data-active="false">
     <header class="subheader">
-      <button class="btn-back" data-target="screen-menu">← Volver</button>
+      <button class="btn-back" data-target="screen-cake">← Volver</button>
       <h2>📸 Nuestra galería</h2>
     </header>
     <p class="section-intro">Cada foto es un pedacito de nosotros. Toca cada una para voltearla.</p>
@@ -127,7 +122,7 @@
   <!-- ================= MUSICA ================= -->
   <section class="screen" id="screen-musica" data-active="false">
     <header class="subheader">
-      <button class="btn-back" data-target="screen-menu">← Volver</button>
+      <button class="btn-back" data-target="screen-cake">← Volver</button>
       <h2>🎵 Nuestra banda sonora</h2>
     </header>
     <p class="section-intro">Estas son las canciones que ya son nuestras.</p>
@@ -140,7 +135,7 @@
   <!-- ================= CARTA ================= -->
   <section class="screen" id="screen-carta" data-active="false">
     <header class="subheader">
-      <button class="btn-back" data-target="screen-menu">← Volver</button>
+      <button class="btn-back" data-target="screen-cake">← Volver</button>
       <h2>💌 La carta</h2>
     </header>
 
@@ -166,7 +161,7 @@
   <!-- ================= ARCADE ================= -->
   <section class="screen" id="screen-arcade" data-active="false">
     <header class="subheader">
-      <button class="btn-back" data-target="screen-menu">← Volver</button>
+      <button class="btn-back" data-target="screen-cake">← Volver</button>
       <h2>🕹️ Zona arcade</h2>
     </header>
     <p class="section-intro">Completa las 4 pruebas para desbloquear tu premio final.</p>

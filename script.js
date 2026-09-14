@@ -214,11 +214,11 @@ mascotRetry.addEventListener("click", () => {
 });
 
 // ============================================================
-// PANTALLA 2: PASTEL
+// PANTALLA 2: PASTEL + REGALOS
 // ============================================================
 const cakeButton = document.getElementById("cake-button");
 const cakeInstruction = document.getElementById("cake-instruction");
-const btnToMenu = document.getElementById("btn-to-menu");
+const giftMenu = document.getElementById("gift-menu");
 let cakeBlown = false;
 
 cakeButton.addEventListener("click", () => {
@@ -226,7 +226,7 @@ cakeButton.addEventListener("click", () => {
   cakeBlown = true;
   cakeButton.classList.add("blown");
   cakeInstruction.classList.add("hidden");
-  btnToMenu.classList.remove("hidden");
+  giftMenu.classList.remove("hidden");
   launchConfetti("confetti-cake", 1200);
 });
 
