@@ -145,7 +145,7 @@ function showMascot(){
 
 function checkCode(){
   if (enteredCode === CONFIG.accessCode){
-    goTo("screen-cake");
+    goTo("screen-menu");
     return;
   }
 
@@ -211,23 +211,6 @@ document.addEventListener("keydown", (e) => {
 
 mascotRetry.addEventListener("click", () => {
   mascotOverlay.classList.add("hidden");
-});
-
-// ============================================================
-// PANTALLA 2: PASTEL
-// ============================================================
-const cakeButton = document.getElementById("cake-button");
-const cakeInstruction = document.getElementById("cake-instruction");
-const btnToMenu = document.getElementById("btn-to-menu");
-let cakeBlown = false;
-
-cakeButton.addEventListener("click", () => {
-  if (cakeBlown) return;
-  cakeBlown = true;
-  cakeButton.classList.add("blown");
-  cakeInstruction.classList.add("hidden");
-  btnToMenu.classList.remove("hidden");
-  launchConfetti("confetti-cake", 1200);
 });
 
 // ============================================================
