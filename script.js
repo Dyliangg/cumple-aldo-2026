@@ -31,23 +31,23 @@ const CONFIG = {
   // Canciones: pon el videoId de YouTube (lo que va después de "v=" en la URL)
   songs: [
     {
-      title: "Lenny Kravitz — [título de la canción]",
-      videoId: "", // pega aquí el ID de YouTube cuando lo tengas
+      title: "Lenny Kravitz — I Belong to You",
+      videoId: "ucvLuGgsGS8",
       quote: "Esta sonaba el día que me pediste ser tu novia. Desde ese momento es nuestra."
     },
     {
-      title: "Damiano David — First Time",
-      videoId: "",
+      title: "Damiano David — The First Time",
+      videoId: "DwIoUsBas-o",
       quote: "Esta te la dediqué yo. Cada palabra decía justo lo que sentía por ti."
     },
     {
       title: "Kevin Kaarl — San Lucas",
-      videoId: "",
+      videoId: "7-Ikexq03O0",
       quote: "Me la dedicaste tú, y desde entonces no la puedo escuchar sin pensar en ti."
     },
     {
-      title: "Los Amigos Invisibles — Encontré",
-      videoId: "",
+      title: "Los Amigos Invisibles — La Que Me Gusta",
+      videoId: "kt5q-Qqatns",
       quote: "“Encontré a la que me gusta”... y sí, así fue. Te encontré a ti."
     },
   ],
