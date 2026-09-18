@@ -121,6 +121,8 @@ const mascotOverlay = document.getElementById("mascot-overlay");
 const mascotFace = document.getElementById("mascot-face");
 const mascotMsg = document.getElementById("mascot-msg");
 const mascotRetry = document.getElementById("mascot-retry");
+const countdownOverlay = document.getElementById("countdown-overlay");
+const countdownNumber = document.getElementById("countdown-number");
 
 const CODE_LENGTH = CONFIG.accessCode.length;
 let enteredCode = "";
@@ -143,9 +145,30 @@ function showMascot(){
   }
 }
 
+function startCountdown(){
+  countdownOverlay.classList.remove("hidden");
+  let n = 3;
+  countdownNumber.textContent = n;
+
+  const tick = () => {
+    n--;
+    if (n > 0){
+      countdownNumber.textContent = n;
+      countdownNumber.classList.remove("pop");
+      void countdownNumber.offsetWidth; // reflow para reiniciar animación
+      countdownNumber.classList.add("pop");
+      setTimeout(tick, 1000);
+    } else {
+      countdownOverlay.classList.add("hidden");
+      goTo("screen-cake");
+    }
+  };
+  setTimeout(tick, 1000);
+}
+
 function checkCode(){
   if (enteredCode === CONFIG.accessCode){
-    goTo("screen-cake");
+    startCountdown();
     return;
   }
 
@@ -166,9 +189,6 @@ function checkCode(){
 
   if (failCount >= 3){
     lockHint.textContent = "💡 Pista: piensa en el día que salimos por primera vez";
-  }
-  if (failCount >= 5){
-    lockHint.textContent += `  ·  intento #${failCount}, el FBI ya viene en camino 🚨`;
   }
 
   enteredCode = "";
