@@ -65,7 +65,7 @@ const CONFIG = {
   // Preguntas del nivel 3 (pistas y respuestas — edítalas)
   quiz: [
     { clue: "Lugar de nuestra primera cita", answer: "" },
-    { clue: "Mi apodo cariñoso para ti", answer: "pechocho" },
+    { clue: "Mi apodo cariñoso para ti", answer: "mi vida" },
     { clue: "Lo que siempre pides de comer", answer: "" },
     { clue: "El mes en que empezamos a salir", answer: "febrero" },
   ],
@@ -179,8 +179,8 @@ function checkCode(){
   lockCard.classList.add("shake");
 
   const messages = [
-    "Inténtalo de nuevo, pechocho.",
-    "El sistema no te reconoce... ¿o sí, pechocho?",
+    "Inténtalo de nuevo, mi vida.",
+    "El sistema no te reconoce... ¿o sí, mi vida?",
     "Nop. Intenta de nuevo, mi amor.",
     "Ese no era, mi amor.",
   ];
