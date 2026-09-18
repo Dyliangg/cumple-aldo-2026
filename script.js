@@ -155,7 +155,7 @@ function checkCode(){
   lockCard.classList.add("shake");
 
   const messages = [
-    "Inténtalo de nuevo, mi vida.",
+    "Inténtalo de nuevo, pechocho.",
     "El sistema no te reconoce... ¿o sí, pechocho?",
     "Nop. Intenta de nuevo, mi amor.",
     "Ese no era, mi amor.",
