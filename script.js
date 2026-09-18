@@ -86,6 +86,7 @@ function goTo(id){
   target.dataset.active = "true";
   window.scrollTo({ top: 0, behavior: "instant" });
 
+  if (id === "screen-cake") startMicBlowDetection();
   if (id === "screen-galeria") renderGallery();
   if (id === "screen-musica") renderSongs();
   if (id === "screen-game-outfit") renderOutfit();
@@ -241,14 +242,85 @@ const cakeInstruction = document.getElementById("cake-instruction");
 const giftMenu = document.getElementById("gift-menu");
 let cakeBlown = false;
 
-cakeButton.addEventListener("click", () => {
+function blowOutCake(){
   if (cakeBlown) return;
   cakeBlown = true;
   cakeButton.classList.add("blown");
   cakeInstruction.classList.add("hidden");
   giftMenu.classList.remove("hidden");
   launchConfetti("confetti-cake", 1200);
-});
+  stopMicBlowDetection();
+}
+
+cakeButton.addEventListener("click", blowOutCake);
+
+// ===== Detección de soplido por micrófono =====
+let micStream = null;
+let micAudioCtx = null;
+let micRafId = null;
+
+function stopMicBlowDetection(){
+  if (micRafId) cancelAnimationFrame(micRafId);
+  micRafId = null;
+  if (micStream){
+    micStream.getTracks().forEach(t => t.stop());
+    micStream = null;
+  }
+  if (micAudioCtx){
+    micAudioCtx.close();
+    micAudioCtx = null;
+  }
+}
+
+function startMicBlowDetection(){
+  if (cakeBlown || micStream || !navigator.mediaDevices?.getUserMedia) return;
+
+  navigator.mediaDevices.getUserMedia({ audio: true })
+    .then((stream) => {
+      if (cakeBlown){
+        stream.getTracks().forEach(t => t.stop());
+        return;
+      }
+      micStream = stream;
+      micAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (micAudioCtx.state === "suspended") micAudioCtx.resume();
+
+      const source = micAudioCtx.createMediaStreamSource(stream);
+      const analyser = micAudioCtx.createAnalyser();
+      analyser.fftSize = 512;
+      source.connect(analyser);
+
+      const data = new Uint8Array(analyser.fftSize);
+      const THRESHOLD = 0.12;   // volumen que consideramos "soplido"
+      const FRAMES_NEEDED = 20; // sostenido ~1/3 de segundo
+      let loudFrames = 0;
+
+      function tick(){
+        analyser.getByteTimeDomainData(data);
+        let sum = 0;
+        for (let i = 0; i < data.length; i++){
+          const v = (data[i] - 128) / 128;
+          sum += v * v;
+        }
+        const rms = Math.sqrt(sum / data.length);
+
+        if (rms > THRESHOLD){
+          loudFrames++;
+          if (loudFrames >= FRAMES_NEEDED){
+            blowOutCake();
+            return;
+          }
+        } else {
+          loudFrames = 0;
+        }
+        micRafId = requestAnimationFrame(tick);
+      }
+      tick();
+    })
+    .catch(() => {
+      // Sin permiso de micrófono o sin soporte: tocar el pastel sigue funcionando.
+    });
+}
 
 // ============================================================
 // GALERÍA
