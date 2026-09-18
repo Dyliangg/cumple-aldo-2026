@@ -37,6 +37,7 @@ html, body{
 button{
   font-family: inherit;
   cursor: pointer;
+  touch-action: manipulation;
 }
 
 .hidden{ display:none !important; }
