@@ -720,7 +720,7 @@ button{
 }
 .kiss-game{
   position: relative;
-  height: 340px;
+  height: 460px;
   background: var(--night-2);
   border-radius: var(--radius-md);
   overflow: hidden;
