@@ -344,7 +344,7 @@ button{
   background: var(--night-2);
   border: 1px solid var(--night-3);
   border-radius: var(--radius-md);
-  padding: 34px 12px;
+  padding: 20px 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -352,40 +352,9 @@ button{
   color: var(--cream);
   transition: border-color 0.15s ease, transform 0.15s ease;
   position: relative;
-  overflow: hidden;
 }
-.menu-card::before{
-  content: "";
-  position: absolute;
-  top: 0; bottom: 0;
-  left: 50%;
-  width: 16px;
-  transform: translateX(-50%);
-  background: linear-gradient(180deg, var(--gold), var(--rose));
-  opacity: 0.5;
-}
-.menu-card::after{
-  content: "";
-  position: absolute;
-  left: 0; right: 0;
-  top: 50%;
-  height: 16px;
-  transform: translateY(-50%);
-  background: linear-gradient(90deg, var(--gold), var(--rose));
-  opacity: 0.5;
-}
-.menu-card > *{ position: relative; z-index: 1; }
 .menu-card:active{ transform: scale(0.97); }
 .menu-card:hover{ border-color: var(--rose); }
-
-.menu-ribbon{
-  position: absolute;
-  top: -8px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 28px;
-  z-index: 2;
-}
 
 .menu-emoji{
   display: flex;
@@ -398,8 +367,8 @@ button{
   height: 52px;
 }
 .menu-emoji img{
-  width: 72px;
-  height: 72px;
+  width: 92px;
+  height: 92px;
   object-fit: contain;
   display: block;
 }
@@ -415,14 +384,6 @@ button{
   pointer-events: none;
   z-index: 5;
 }
-@keyframes bow-fly{
-  0%{ transform: translateX(-50%) translateY(0) rotate(0deg); opacity: 1; }
-  100%{ transform: translateX(-50%) translateY(-26px) rotate(50deg); opacity: 0; }
-}
-.menu-card.opening .menu-ribbon{
-  animation: bow-fly 0.42s ease forwards;
-}
-
 .btn-final{
   margin-top: 36px;
   background: transparent;
@@ -579,6 +540,14 @@ button{
   font-size: 15px;
   line-height: 1.5;
   margin: 0;
+}
+
+.song-footer{
+  margin-top: 24px;
+  font-size: 14px;
+  color: rgba(247,241,228,0.7);
+  line-height: 1.55;
+  text-align: center;
 }
 
 /* ===== Carta ===== */

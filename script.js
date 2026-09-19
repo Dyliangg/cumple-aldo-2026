@@ -43,12 +43,17 @@ const CONFIG = {
     {
       title: "Kevin Kaarl — San Lucas",
       videoId: "7-Ikexq03O0",
-      quote: "Me la dedicaste tú, y desde entonces no la puedo escuchar sin pensar en ti."
+      quote: "Me la dedicaste tú, y desde entonces no la puedo escuchar sin pensar en ti. Ahí entendí que a donde sea, pero contigo."
     },
     {
       title: "Los Amigos Invisibles — La Que Me Gusta",
       videoId: "kt5q-Qqatns",
-      quote: "“Encontré a la que me gusta”... y sí, así fue. Te encontré a ti."
+      quote: "“Encontré a la que me gusta”... y sí, así fue. Te encontré a ti. Pronto la vamos a escuchar en vivo, y eso no se nos va a olvidar."
+    },
+    {
+      title: "Julión Álvarez — Regalo de Dios",
+      videoId: "LiUgY_jlDoI",
+      quote: "Esta es la promesa que te hago cada día: cuidarte, no dejar que te falte nada, y trabajar por tu felicidad."
     },
   ],
 
