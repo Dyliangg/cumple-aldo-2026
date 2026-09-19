@@ -344,11 +344,11 @@ button{
   background: var(--night-2);
   border: 1px solid var(--night-3);
   border-radius: var(--radius-md);
-  padding: 32px 12px 22px;
+  padding: 34px 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
   color: var(--cream);
   transition: border-color 0.15s ease, transform 0.15s ease;
   position: relative;
@@ -368,8 +368,9 @@ button{
   content: "";
   position: absolute;
   left: 0; right: 0;
-  top: 46px;
+  top: 50%;
   height: 16px;
+  transform: translateY(-50%);
   background: linear-gradient(90deg, var(--gold), var(--rose));
   opacity: 0.5;
 }
@@ -386,8 +387,7 @@ button{
   z-index: 2;
 }
 
-.menu-emoji{ font-size: 30px; margin-top: 6px; }
-.menu-label{ font-size: 14px; font-weight: 500; }
+.menu-emoji{ font-size: 56px; line-height: 1; }
 
 @keyframes gift-pop{
   0%{ transform: scale(1) rotate(0deg); filter: brightness(1); }
