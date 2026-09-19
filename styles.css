@@ -280,14 +280,7 @@ button{
   font-family: var(--font-serif);
   font-size: 34px;
   font-weight: 600;
-  margin: 4px 0 14px;
-}
-
-.cake-copy{
-  font-size: 15px;
-  color: rgba(247,241,228,0.8);
-  line-height: 1.55;
-  margin: 0 0 28px;
+  margin: 4px 0 28px;
 }
 
 .cake{
