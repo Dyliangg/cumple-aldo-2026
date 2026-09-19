@@ -166,7 +166,7 @@ button{
   pointer-events: none;
 }
 .key-del{
-  font-size: 20px;
+  font-size: 28px;
   color: var(--rose-soft);
 }
 
