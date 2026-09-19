@@ -239,6 +239,7 @@ mascotRetry.addEventListener("click", () => {
 // ============================================================
 const cakeButton = document.getElementById("cake-button");
 const cakeInstruction = document.getElementById("cake-instruction");
+const cakeCopy = document.getElementById("cake-copy");
 const giftMenu = document.getElementById("gift-menu");
 let cakeBlown = false;
 
@@ -247,6 +248,7 @@ function blowOutCake(){
   cakeBlown = true;
   cakeButton.classList.add("blown");
   cakeInstruction.classList.add("hidden");
+  cakeCopy.classList.add("hidden");
   giftMenu.classList.remove("hidden");
   launchConfetti("confetti-cake", 1200);
   stopMicBlowDetection();
