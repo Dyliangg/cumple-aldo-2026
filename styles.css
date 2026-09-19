@@ -380,7 +380,16 @@ button{
   z-index: 2;
 }
 
-.menu-emoji{ font-size: 56px; line-height: 1; }
+.menu-emoji{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cream);
+}
+.menu-emoji svg{
+  width: 52px;
+  height: 52px;
+}
 
 @keyframes gift-pop{
   0%{ transform: scale(1) rotate(0deg); filter: brightness(1); }
