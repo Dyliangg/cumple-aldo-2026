@@ -548,7 +548,7 @@ button{
   font-style: italic;
   font-size: 19px;
   font-weight: 600;
-  color: var(--gold);
+  color: rgba(199,179,224,0.9);
   line-height: 1.5;
   text-align: center;
 }
