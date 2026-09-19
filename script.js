@@ -57,8 +57,8 @@ const CONFIG = {
     },
   ],
 
-  // Foto para el rompecabezas (archivo en assets/). Déjalo vacío hasta que agregues la foto.
-  puzzleImage: "",
+  // Foto para el rompecabezas.
+  puzzleImage: "Rompecabezas.jpeg",
 
   // Frases que caen en el juego de besos
   kissPhrases: ["💋", "💋", "Te amo", "💋", "Eres mi favorito", "💋", "Contigo siempre", "💋"],
