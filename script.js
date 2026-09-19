@@ -33,11 +33,11 @@ const CONFIG = {
     {
       title: "Lenny Kravitz — I Belong to You",
       videoId: "ucvLuGgsGS8",
-      quote: "Esta sonaba el día que me pediste ser tu novia. Desde ese momento es nuestra."
+      quote: "Ese día sonaba Lenny Kravitz cuando me pediste ser tu novia. No sé si era exactamente esta canción, pero es tan romántica que me recuerda a ti."
     },
     {
       title: "Damiano David — The First Time",
-      videoId: "DwIoUsBas-o",
+      videoId: "n1Hzf_is8tI",
       quote: "Esta te la dediqué yo. Cada palabra decía justo lo que sentía por ti."
     },
     {

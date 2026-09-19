@@ -543,10 +543,13 @@ button{
 }
 
 .song-footer{
-  margin-top: 24px;
-  font-size: 14px;
-  color: rgba(247,241,228,0.7);
-  line-height: 1.55;
+  margin-top: 28px;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--gold);
+  line-height: 1.5;
   text-align: center;
 }
 
