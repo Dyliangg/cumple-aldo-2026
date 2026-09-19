@@ -57,23 +57,8 @@ const CONFIG = {
     },
   ],
 
-  // Outfit: emojis de opciones por categoría
-  outfit: {
-    top:    ["👕", "👔", "🧥"],
-    bottom: ["👖", "🩳", "👗"],
-    shoes:  ["👟", "🥾", "🩴"],
-  },
-
-  // Toppings del pastel
-  toppings: ["🍓", "🍫", "🍒", "🌟", "🍩", "🧁"],
-
-  // Preguntas del nivel 3 (pistas y respuestas — edítalas)
-  quiz: [
-    { clue: "Lugar de nuestra primera cita", answer: "" },
-    { clue: "Mi apodo cariñoso para ti", answer: "mi vida" },
-    { clue: "Lo que siempre pides de comer", answer: "" },
-    { clue: "El mes en que empezamos a salir", answer: "febrero" },
-  ],
+  // Foto para el rompecabezas (archivo en assets/). Déjalo vacío hasta que agregues la foto.
+  puzzleImage: "",
 
   // Frases que caen en el juego de besos
   kissPhrases: ["💋", "💋", "Te amo", "💋", "Eres mi favorito", "💋", "Contigo siempre", "💋"],
@@ -94,9 +79,7 @@ function goTo(id){
   if (id === "screen-cake") startMicBlowDetection();
   if (id === "screen-galeria") renderGallery();
   if (id === "screen-musica") renderSongs();
-  if (id === "screen-game-outfit") renderOutfit();
-  if (id === "screen-game-cake") renderCakeDecor();
-  if (id === "screen-game-quiz") renderQuiz();
+  if (id === "screen-game-puzzle") renderPuzzle();
 }
 
 document.querySelectorAll("[data-target]:not(.menu-card)").forEach(el => {
@@ -401,131 +384,84 @@ seal.addEventListener("click", () => {
 // ============================================================
 // ARCADE — progreso general
 // ============================================================
-let levelsDone = { 1: false, 2: false, 3: false, 4: false };
+let levelsDone = { 1: false, 2: false };
 
 function markLevelDone(n){
   levelsDone[n] = true;
   document.getElementById(`check-${n}`).textContent = "✅";
   const total = Object.values(levelsDone).filter(Boolean).length;
-  document.getElementById("progress-label").textContent = `⭐ ${total}/4 niveles completados`;
+  document.getElementById("progress-label").textContent = `⭐ ${total}/2 juegos completados`;
 }
 
-// ===== Nivel 1: Outfit =====
-let outfitState = { top: null, bottom: null, shoes: null };
+// ===== Nivel 1: Rompecabezas =====
+function renderPuzzle(){
+  const grid = document.getElementById("puzzle-grid");
+  if (grid.dataset.rendered) return;
+  grid.dataset.rendered = "true";
 
-function renderOutfit(){
-  const rows = { top: "row-top", bottom: "row-bottom", shoes: "row-shoes" };
-  Object.entries(rows).forEach(([cat, rowId]) => {
-    const row = document.getElementById(rowId);
-    if (row.dataset.rendered) return;
-    row.dataset.rendered = "true";
-    CONFIG.outfit[cat].forEach(emoji => {
-      const btn = document.createElement("button");
-      btn.className = "outfit-option";
-      btn.textContent = emoji;
-      btn.addEventListener("click", () => {
-        row.querySelectorAll(".outfit-option").forEach(b => b.classList.remove("selected"));
-        btn.classList.add("selected");
-        outfitState[cat] = emoji;
-        updateOutfitPreview();
-      });
-      row.appendChild(btn);
-    });
-  });
-}
-
-function updateOutfitPreview(){
-  const parts = [outfitState.top, outfitState.bottom, outfitState.shoes].filter(Boolean);
-  document.getElementById("outfit-preview").textContent = parts.length ? parts.join(" ") : "🧍";
-}
-
-document.getElementById("outfit-done").addEventListener("click", () => {
-  markLevelDone(1);
-  goTo("screen-arcade");
-});
-
-// ===== Nivel 2: Decora el pastel =====
-function renderCakeDecor(){
-  const picker = document.getElementById("toppings-picker");
-  if (picker.dataset.rendered) return;
-  picker.dataset.rendered = "true";
-
-  CONFIG.toppings.forEach(topping => {
-    const btn = document.createElement("button");
-    btn.className = "topping-btn";
-    btn.textContent = topping;
-    btn.addEventListener("click", () => addTopping(topping));
-    picker.appendChild(btn);
-  });
-}
-
-function addTopping(emoji){
-  const layer = document.getElementById("toppings-layer");
-  const el = document.createElement("span");
-  el.className = "topping-placed";
-  el.textContent = emoji;
-  el.style.left = `${20 + Math.random() * 60}%`;
-  el.style.top = `${10 + Math.random() * 50}%`;
-  layer.appendChild(el);
-}
-
-document.getElementById("cake-decor-done").addEventListener("click", () => {
-  markLevelDone(2);
-  goTo("screen-arcade");
-});
-
-// ===== Nivel 3: Quiz =====
-function renderQuiz(){
-  const box = document.getElementById("quiz-box");
-  if (box.dataset.rendered) return;
-  box.dataset.rendered = "true";
-
-  CONFIG.quiz.forEach((q, i) => {
-    const div = document.createElement("div");
-    div.className = "quiz-question";
-    div.innerHTML = `
-      <p class="quiz-clue">${i + 1}. ${q.clue}</p>
-      <div class="quiz-input-row">
-        <input type="text" placeholder="Tu respuesta..." id="quiz-input-${i}">
-        <button data-i="${i}">Ver</button>
-      </div>
-      <p class="quiz-status" id="quiz-status-${i}"></p>
-    `;
-    box.appendChild(div);
-  });
-
-  box.querySelectorAll("button[data-i]").forEach(btn => {
-    btn.addEventListener("click", () => checkQuiz(Number(btn.dataset.i)));
-  });
-}
-
-let quizCorrectCount = 0;
-function checkQuiz(i){
-  const input = document.getElementById(`quiz-input-${i}`);
-  const status = document.getElementById(`quiz-status-${i}`);
-  const answer = CONFIG.quiz[i].answer.trim().toLowerCase();
-  const value = input.value.trim().toLowerCase();
-
-  if (!answer){
-    status.textContent = "⚠️ Falta poner la respuesta correcta en script.js";
-    status.className = "quiz-status";
+  if (!CONFIG.puzzleImage){
+    grid.innerHTML = `<p class="puzzle-empty">Agrega una foto de ustedes en <code>CONFIG.puzzleImage</code> (script.js) para activar el rompecabezas.</p>`;
     return;
   }
 
-  if (value === answer){
-    status.textContent = "✅ ¡Correcto!";
-    status.className = "quiz-status correct";
-    quizCorrectCount++;
-    if (quizCorrectCount >= Math.ceil(CONFIG.quiz.length * 0.75)){
-      markLevelDone(3);
-    }
-  } else {
-    status.textContent = "❌ No es esa... intenta otra vez";
-    status.className = "quiz-status wrong";
+  const size = 3;
+  const order = Array.from({ length: size * size }, (_, i) => i);
+  for (let i = order.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [order[i], order[j]] = [order[j], order[i]];
+  }
+
+  let selected = null;
+
+  order.forEach(correctIndex => {
+    const tile = document.createElement("button");
+    tile.type = "button";
+    tile.className = "puzzle-tile";
+    tile.dataset.correct = correctIndex;
+    const col = correctIndex % size;
+    const row = Math.floor(correctIndex / size);
+    tile.style.backgroundImage = `url("${CONFIG.puzzleImage}")`;
+    tile.style.backgroundSize = `${size * 100}% ${size * 100}%`;
+    tile.style.backgroundPosition = `${(col * 100) / (size - 1)}% ${(row * 100) / (size - 1)}%`;
+
+    tile.addEventListener("click", () => {
+      if (selected === null){
+        selected = tile;
+        tile.classList.add("selected");
+        return;
+      }
+      if (selected === tile){
+        tile.classList.remove("selected");
+        selected = null;
+        return;
+      }
+      const tmpPos = selected.style.backgroundPosition;
+      const tmpCorrect = selected.dataset.correct;
+      selected.style.backgroundPosition = tile.style.backgroundPosition;
+      selected.dataset.correct = tile.dataset.correct;
+      tile.style.backgroundPosition = tmpPos;
+      tile.dataset.correct = tmpCorrect;
+
+      selected.classList.remove("selected");
+      selected = null;
+      checkPuzzleSolved();
+    });
+
+    grid.appendChild(tile);
+  });
+}
+
+function checkPuzzleSolved(){
+  const tiles = document.querySelectorAll(".puzzle-tile");
+  const solved = Array.from(tiles).every((tile, i) => Number(tile.dataset.correct) === i);
+  const feedback = document.getElementById("puzzle-feedback");
+  if (solved){
+    feedback.textContent = "¡Lo lograste! 🎉";
+    markLevelDone(1);
   }
 }
 
-// ===== Nivel 4: Atrapa los besos =====
+// ===== Nivel 2: Atrapa los besos =====
 const kissGame = document.getElementById("kiss-game");
 const kissPlayer = document.getElementById("kiss-player");
 const kissStart = document.getElementById("kiss-start");
@@ -595,7 +531,7 @@ function endKissGame(){
   kissGame.querySelectorAll(".kiss-item").forEach(el => el.remove());
   kissStart.textContent = `¡${kissScore} atrapados! Jugar de nuevo`;
   kissStart.classList.remove("hidden");
-  if (kissScore >= 5) markLevelDone(4);
+  if (kissScore >= 5) markLevelDone(2);
 }
 
 kissStart.addEventListener("click", startKissGame);

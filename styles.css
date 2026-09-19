@@ -672,104 +672,45 @@ button{
   font-size: 14px;
 }
 
-/* Nivel 1: outfit */
-.outfit-preview{
-  text-align: center;
-  font-size: 90px;
-  margin: 10px 0 20px;
-}
-.outfit-picker{ display: flex; flex-direction: column; gap: 12px; }
-.outfit-row{ display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-.outfit-option{
-  background: var(--night-2);
-  border: 1px solid var(--night-3);
-  border-radius: var(--radius-sm);
-  padding: 10px 14px;
-  font-size: 20px;
-  color: var(--cream);
-}
-.outfit-option.selected{
-  border-color: var(--rose);
-  background: var(--night-3);
-}
-
-/* Nivel 2: decora pastel */
-.decor-cake-wrap{
-  position: relative;
-  text-align: center;
-  margin: 10px 0 20px;
-  height: 140px;
-}
-.decor-cake{ font-size: 110px; }
-.toppings-layer{
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  pointer-events: none;
-}
-.topping-placed{
-  position: absolute;
-  font-size: 22px;
-  animation: pop 0.25s ease;
-}
-@keyframes pop{
-  from{ transform: scale(0); }
-  to{ transform: scale(1); }
-}
-
-.toppings-picker{
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
-}
-.topping-btn{
-  background: var(--night-2);
-  border: 1px solid var(--night-3);
-  border-radius: var(--radius-sm);
-  padding: 10px 14px;
-  font-size: 20px;
-}
-
-/* Nivel 3: quiz */
-.quiz-question{
-  background: var(--night-2);
+/* Nivel 1: rompecabezas */
+.puzzle-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  aspect-ratio: 1;
+  max-width: 320px;
+  margin: 10px auto 0;
   border-radius: var(--radius-md);
-  padding: 18px;
-  margin-bottom: 14px;
+  overflow: hidden;
 }
-.quiz-clue{
-  font-family: var(--font-serif);
-  font-size: 16px;
-  margin: 0 0 12px;
-}
-.quiz-input-row{ display: flex; gap: 8px; }
-.quiz-input-row input{
-  flex: 1;
-  background: var(--night);
-  border: 1px solid var(--night-3);
-  border-radius: var(--radius-sm);
-  padding: 10px 12px;
-  color: var(--cream);
-  font-family: var(--font-ui);
-}
-.quiz-input-row button{
-  background: var(--rose);
-  color: var(--night);
+.puzzle-tile{
+  aspect-ratio: 1;
   border: none;
-  border-radius: var(--radius-sm);
-  padding: 10px 14px;
-  font-weight: 600;
+  background-color: var(--night-2);
+  background-repeat: no-repeat;
+  padding: 0;
 }
-.quiz-status{
-  font-size: 13px;
-  margin-top: 8px;
-  min-height: 18px;
+.puzzle-tile.selected{
+  outline: 3px solid var(--rose);
+  outline-offset: -3px;
 }
-.quiz-status.correct{ color: var(--success); }
-.quiz-status.wrong{ color: var(--rose-soft); }
+.puzzle-empty{
+  grid-column: 1 / -1;
+  font-size: 14px;
+  color: rgba(247,241,228,0.6);
+  text-align: center;
+  padding: 40px 10px;
+}
+.puzzle-feedback{
+  text-align: center;
+  font-family: var(--font-serif);
+  font-size: 18px;
+  color: var(--gold);
+  margin-top: 16px;
+  min-height: 26px;
+}
 
-/* Nivel 4: besos */
+/* Nivel 2: besos */
 .kiss-hud{
   display: flex;
   justify-content: space-between;
@@ -790,8 +731,12 @@ button{
   bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 34px;
   transition: left 0.08s linear;
+}
+.kiss-player img{
+  width: 52px;
+  height: 52px;
+  display: block;
 }
 .kiss-item{
   position: absolute;

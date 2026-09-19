@@ -159,91 +159,45 @@
   <section class="screen" id="screen-arcade" data-active="false">
     <header class="subheader">
       <button class="btn-back" data-target="screen-cake">← Volver</button>
-      <h2>🕹️ Zona arcade</h2>
+      <h2>🕹️ Juegos</h2>
     </header>
-    <p class="section-intro">Completa las 4 pruebas para desbloquear tu premio final.</p>
+    <p class="section-intro">Completa los 2 juegos para desbloquear tu premio final.</p>
 
     <div class="progress-bar">
-      <span id="progress-label">⭐ 0/4 niveles completados</span>
+      <span id="progress-label">⭐ 0/2 juegos completados</span>
     </div>
 
     <div class="arcade-grid">
-      <button class="arcade-card" data-target="screen-game-outfit">
+      <button class="arcade-card" data-target="screen-game-puzzle">
         <span class="arcade-num" data-level="1">1</span>
-        <span>Vístenos para la cita</span>
+        <span>Rompecabezas</span>
         <span class="arcade-check" id="check-1"></span>
       </button>
-      <button class="arcade-card" data-target="screen-game-cake">
+      <button class="arcade-card" data-target="screen-game-kisses">
         <span class="arcade-num" data-level="2">2</span>
-        <span>Decora el pastel</span>
+        <span>Atrapa los besos</span>
         <span class="arcade-check" id="check-2"></span>
       </button>
-      <button class="arcade-card" data-target="screen-game-quiz">
-        <span class="arcade-num" data-level="3">3</span>
-        <span>Adivina y gana</span>
-        <span class="arcade-check" id="check-3"></span>
-      </button>
-      <button class="arcade-card" data-target="screen-game-kisses">
-        <span class="arcade-num" data-level="4">4</span>
-        <span>Atrapa los besos</span>
-        <span class="arcade-check" id="check-4"></span>
-      </button>
     </div>
   </section>
 
-  <!-- ===== Nivel 1: Outfit ===== -->
-  <section class="screen" id="screen-game-outfit" data-active="false">
+  <!-- ===== Nivel 1: Rompecabezas ===== -->
+  <section class="screen" id="screen-game-puzzle" data-active="false">
     <header class="subheader">
       <button class="btn-back" data-target="screen-arcade">← Volver</button>
-      <h2>Nivel 1 · Vístenos</h2>
+      <h2>Nivel 1 · Rompecabezas</h2>
     </header>
-    <p class="section-intro">Elige el outfit perfecto para nuestra próxima cita.</p>
+    <p class="section-intro">Toca dos piezas para intercambiarlas y arma la foto.</p>
 
-    <div class="outfit-preview" id="outfit-preview">🧍</div>
-
-    <div class="outfit-picker">
-      <div class="outfit-row" id="row-top"></div>
-      <div class="outfit-row" id="row-bottom"></div>
-      <div class="outfit-row" id="row-shoes"></div>
-    </div>
-
-    <button class="btn-primary" id="outfit-done">Listo, ¡nos vamos!</button>
+    <div class="puzzle-grid" id="puzzle-grid"></div>
+    <p class="puzzle-feedback" id="puzzle-feedback"></p>
   </section>
 
-  <!-- ===== Nivel 2: Decora el pastel ===== -->
-  <section class="screen" id="screen-game-cake" data-active="false">
-    <header class="subheader">
-      <button class="btn-back" data-target="screen-arcade">← Volver</button>
-      <h2>Nivel 2 · Decora el pastel</h2>
-    </header>
-    <p class="section-intro">Toca los ingredientes para ponerlos en el pastel.</p>
-
-    <div class="decor-cake-wrap">
-      <div class="decor-cake" id="decor-cake">🎂</div>
-      <div class="toppings-layer" id="toppings-layer"></div>
-    </div>
-
-    <div class="toppings-picker" id="toppings-picker"></div>
-
-    <button class="btn-primary" id="cake-decor-done">¡Ya quedó perfecto!</button>
-  </section>
-
-  <!-- ===== Nivel 3: Quiz / pistas ===== -->
-  <section class="screen" id="screen-game-quiz" data-active="false">
-    <header class="subheader">
-      <button class="btn-back" data-target="screen-arcade">← Volver</button>
-      <h2>Nivel 3 · Adivina y gana</h2>
-    </header>
-    <p class="section-intro">Responde las pistas de nuestra historia.</p>
-
-    <div class="quiz-box" id="quiz-box"></div>
-  </section>
-
-  <!-- ===== Nivel 4: Atrapa los besos ===== -->
+  <!-- ===== Nivel 2: Atrapa los besos ===== -->
   <section class="screen" id="screen-game-kisses" data-active="false">
     <header class="subheader">
       <button class="btn-back" data-target="screen-arcade">← Volver</button>
-      <h2>Nivel 4 · Atrapa los besos</h2>
+      <h2>Nivel 2 · Atrapa los besos</h2>
     </header>
     <p class="section-intro">Usa las flechas ← → (o desliza el dedo) para mover al monito.</p>
 
@@ -253,10 +207,10 @@
     </div>
 
     <div class="kiss-game" id="kiss-game">
-      <div class="kiss-player" id="kiss-player">😊</div>
+      <div class="kiss-player" id="kiss-player"><img src="assets/gato-besos.png" alt="gatito"></div>
     </div>
 
-    <button class="btn-primary hidden" id="kiss-start">Empezar</button>
+    <button class="btn-primary" id="kiss-start">Empezar</button>
   </section>
 
   <!-- ================= FINAL ================= -->
