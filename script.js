@@ -59,14 +59,11 @@ const CONFIG = {
     },
   ],
 
-  // Foto para el rompecabezas.
-  puzzleImage: "Rompecabezas.jpeg",
-
   // Frases que caen en el juego de besos
   kissPhrases: ["💋", "💋", "Te amo", "💋", "Eres el amor de mi vida y todas mis vidas", "💋", "Feliz Cumpleaños", "💋"],
 
   // Texto del vale sorpresa final
-  valeText: "[escribe aquí el vale sorpresa: una cita, un día libre de quehaceres, etc.]",
+  valeText: "Tu sorpresa está escondida donde llega diciembre... en un armario de tu oficina 🎁",
 };
 
 // ============================================================
@@ -81,7 +78,6 @@ function goTo(id){
   if (id === "screen-cake") startMicBlowDetection();
   if (id === "screen-galeria") renderGallery();
   if (id === "screen-musica") renderSongs();
-  if (id === "screen-game-puzzle") renderPuzzle();
 }
 
 document.querySelectorAll("[data-target]:not(.menu-card)").forEach(el => {
@@ -388,95 +384,11 @@ seal.addEventListener("click", () => {
 // ============================================================
 // ARCADE — progreso general
 // ============================================================
-let levelsDone = { 1: false, 2: false };
-
 function markLevelDone(n){
-  levelsDone[n] = true;
   document.getElementById(`check-${n}`).textContent = "✅";
-  const total = Object.values(levelsDone).filter(Boolean).length;
-  document.getElementById("progress-label").textContent = `⭐ ${total}/2 juegos completados`;
 }
 
-// ===== Nivel 1: Rompecabezas =====
-function renderPuzzle(){
-  const grid = document.getElementById("puzzle-grid");
-  if (grid.dataset.rendered) return;
-  grid.dataset.rendered = "true";
-
-  if (!CONFIG.puzzleImage){
-    grid.innerHTML = `<p class="puzzle-empty">Agrega una foto de ustedes en <code>CONFIG.puzzleImage</code> (script.js) para activar el rompecabezas.</p>`;
-    return;
-  }
-
-  // Precargamos la imagen: si falla (ruta incorrecta, archivo movido) lo avisa
-  // en pantalla en vez de dejar el rompecabezas en blanco sin explicación.
-  const preload = new Image();
-  preload.onload = () => buildPuzzleTiles(grid);
-  preload.onerror = () => {
-    grid.innerHTML = `<p class="puzzle-empty">No se pudo cargar "${CONFIG.puzzleImage}". Revisa que el archivo esté en la carpeta del proyecto con ese mismo nombre.</p>`;
-  };
-  preload.src = CONFIG.puzzleImage;
-}
-
-function buildPuzzleTiles(grid){
-  const size = 3;
-  const order = Array.from({ length: size * size }, (_, i) => i);
-  for (let i = order.length - 1; i > 0; i--){
-    const j = Math.floor(Math.random() * (i + 1));
-    [order[i], order[j]] = [order[j], order[i]];
-  }
-
-  let selected = null;
-
-  order.forEach(correctIndex => {
-    const tile = document.createElement("button");
-    tile.type = "button";
-    tile.className = "puzzle-tile";
-    tile.dataset.correct = correctIndex;
-    const col = correctIndex % size;
-    const row = Math.floor(correctIndex / size);
-    tile.style.backgroundImage = `url("${CONFIG.puzzleImage}")`;
-    tile.style.backgroundSize = `${size * 100}% ${size * 100}%`;
-    tile.style.backgroundPosition = `${(col * 100) / (size - 1)}% ${(row * 100) / (size - 1)}%`;
-
-    tile.addEventListener("click", () => {
-      if (selected === null){
-        selected = tile;
-        tile.classList.add("selected");
-        return;
-      }
-      if (selected === tile){
-        tile.classList.remove("selected");
-        selected = null;
-        return;
-      }
-      const tmpPos = selected.style.backgroundPosition;
-      const tmpCorrect = selected.dataset.correct;
-      selected.style.backgroundPosition = tile.style.backgroundPosition;
-      selected.dataset.correct = tile.dataset.correct;
-      tile.style.backgroundPosition = tmpPos;
-      tile.dataset.correct = tmpCorrect;
-
-      selected.classList.remove("selected");
-      selected = null;
-      checkPuzzleSolved();
-    });
-
-    grid.appendChild(tile);
-  });
-}
-
-function checkPuzzleSolved(){
-  const tiles = document.querySelectorAll(".puzzle-tile");
-  const solved = Array.from(tiles).every((tile, i) => Number(tile.dataset.correct) === i);
-  const feedback = document.getElementById("puzzle-feedback");
-  if (solved){
-    feedback.textContent = "¡Lo lograste! 🎉";
-    markLevelDone(1);
-  }
-}
-
-// ===== Nivel 2: Atrapa los besos =====
+// ===== Atrapa los besos =====
 const kissGame = document.getElementById("kiss-game");
 const kissPlayer = document.getElementById("kiss-player");
 const kissStart = document.getElementById("kiss-start");
@@ -546,7 +458,7 @@ function endKissGame(){
   kissGame.querySelectorAll(".kiss-item").forEach(el => el.remove());
   kissStart.textContent = `¡${kissScore} atrapados! Jugar de nuevo`;
   kissStart.classList.remove("hidden");
-  if (kissScore >= 5) markLevelDone(2);
+  if (kissScore >= 5) markLevelDone(1);
 }
 
 kissStart.addEventListener("click", startKissGame);

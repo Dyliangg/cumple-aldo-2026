@@ -638,19 +638,15 @@ button{
 }
 
 /* ===== Arcade ===== */
-.progress-bar{
-  background: var(--night-2);
-  border-radius: var(--radius-sm);
-  padding: 12px 16px;
-  font-size: 13px;
-  color: var(--gold);
-  margin-bottom: 20px;
-}
-
 .arcade-grid{
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 14px;
+}
+.arcade-grid-single{
+  grid-template-columns: 1fr;
+  max-width: 220px;
+  margin: 0 auto;
 }
 
 .arcade-card{
@@ -686,45 +682,7 @@ button{
   font-size: 14px;
 }
 
-/* Nivel 1: rompecabezas */
-.puzzle-grid{
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 4px;
-  aspect-ratio: 1;
-  max-width: 320px;
-  margin: 10px auto 0;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-}
-.puzzle-tile{
-  aspect-ratio: 1;
-  border: none;
-  background-color: var(--night-2);
-  background-repeat: no-repeat;
-  padding: 0;
-}
-.puzzle-tile.selected{
-  outline: 3px solid var(--rose);
-  outline-offset: -3px;
-}
-.puzzle-empty{
-  grid-column: 1 / -1;
-  font-size: 14px;
-  color: rgba(247,241,228,0.6);
-  text-align: center;
-  padding: 40px 10px;
-}
-.puzzle-feedback{
-  text-align: center;
-  font-family: var(--font-serif);
-  font-size: 18px;
-  color: var(--gold);
-  margin-top: 16px;
-  min-height: 26px;
-}
-
-/* Nivel 2: besos */
+/* Atrapa los besos */
 .kiss-hud{
   display: flex;
   justify-content: space-between;
