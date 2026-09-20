@@ -20,14 +20,14 @@ const CONFIG = {
 
   // Frases/captions de las fotos de la galería (edita con tus recuerdos reales)
   photos: [
-    { src: "assets/foto-1.jpg", caption: "El día que salimos por primera vez", date: "28 feb 2026" },
-    { src: "assets/foto-2.jpg", caption: "El día que me pediste ser tu novia", date: "29 mar 2026" },
-    { src: "assets/foto-3.jpg", caption: "Nuestro primer festival", date: "[fecha]" },
-    { src: "assets/foto-4.jpg", caption: "Nuestro primer viaje a Mérida", date: "[fecha]" },
-    { src: "assets/foto-5.jpg", caption: "Taxco, mi amor: todos los destinos están tan llenos de magia", date: "[fecha]" },
-    { src: "assets/foto-6.jpg", caption: "Nuestro primer mundial, qué emoción", date: "[fecha]" },
-    { src: "assets/foto-7.jpg", caption: "Amo ir a museos contigo", date: "[fecha]" },
-    { src: "assets/foto-8.jpg", caption: "Gracias por hacer mi cumpleaños tan especial, quiero hacer siempre los tuyos tan especial", date: "[fecha]" },
+    { src: "assets/foto-1.jpg", caption: "El día que salimos por primera vez" },
+    { src: "assets/foto-2.jpg", caption: "El día que me pediste ser tu novia" },
+    { src: "assets/foto-3.jpg", caption: "Nuestro primer festival" },
+    { src: "assets/foto-4.jpg", caption: "Nuestro primer viaje a Mérida" },
+    { src: "assets/foto-5.jpg", caption: "Taxco, mi amor: todos los destinos están tan llenos de magia" },
+    { src: "assets/foto-6.jpg", caption: "Nuestro primer mundial, qué emoción" },
+    { src: "assets/foto-7.jpg", caption: "Amo ir a museos contigo" },
+    { src: "assets/foto-8.jpg", caption: "Gracias por hacer mi cumpleaños tan especial, quiero hacer siempre los tuyos tan especial" },
   ],
 
   // Canciones: pon el videoId de YouTube (lo que va después de "v=" en la URL)
@@ -63,7 +63,7 @@ const CONFIG = {
   puzzleImage: "Rompecabezas.jpeg",
 
   // Frases que caen en el juego de besos
-  kissPhrases: ["💋", "💋", "Te amo", "💋", "Eres mi favorito", "💋", "Contigo siempre", "💋"],
+  kissPhrases: ["💋", "💋", "Te amo", "💋", "Eres el amor de mi vida y todas mis vidas", "💋", "Feliz Cumpleaños", "💋"],
 
   // Texto del vale sorpresa final
   valeText: "[escribe aquí el vale sorpresa: una cita, un día libre de quehaceres, etc.]",
@@ -334,7 +334,6 @@ function renderGallery(){
         </div>
         <div class="polaroid-face polaroid-back">
           <p class="polaroid-caption">${photo.caption}</p>
-          <p class="polaroid-date">${photo.date}</p>
         </div>
       </div>
     `;
@@ -409,6 +408,17 @@ function renderPuzzle(){
     return;
   }
 
+  // Precargamos la imagen: si falla (ruta incorrecta, archivo movido) lo avisa
+  // en pantalla en vez de dejar el rompecabezas en blanco sin explicación.
+  const preload = new Image();
+  preload.onload = () => buildPuzzleTiles(grid);
+  preload.onerror = () => {
+    grid.innerHTML = `<p class="puzzle-empty">No se pudo cargar "${CONFIG.puzzleImage}". Revisa que el archivo esté en la carpeta del proyecto con ese mismo nombre.</p>`;
+  };
+  preload.src = CONFIG.puzzleImage;
+}
+
+function buildPuzzleTiles(grid){
   const size = 3;
   const order = Array.from({ length: size * size }, (_, i) => i);
   for (let i = order.length - 1; i > 0; i--){
