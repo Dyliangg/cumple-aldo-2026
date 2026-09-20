@@ -20,12 +20,14 @@ const CONFIG = {
 
   // Frases/captions de las fotos de la galería (edita con tus recuerdos reales)
   photos: [
-    { caption: "El día que salimos por primera vez", date: "28 feb 2026" },
-    { caption: "El día que me pediste ser tu novia", date: "29 mar 2026" },
-    { caption: "[agrega tu recuerdo aquí]", date: "[fecha]" },
-    { caption: "[agrega tu recuerdo aquí]", date: "[fecha]" },
-    { caption: "[agrega tu recuerdo aquí]", date: "[fecha]" },
-    { caption: "[agrega tu recuerdo aquí]", date: "[fecha]" },
+    { src: "assets/foto-1.jpg", caption: "El día que salimos por primera vez", date: "28 feb 2026" },
+    { src: "assets/foto-2.jpg", caption: "El día que me pediste ser tu novia", date: "29 mar 2026" },
+    { src: "assets/foto-3.jpg", caption: "Nuestro primer festival", date: "[fecha]" },
+    { src: "assets/foto-4.jpg", caption: "Nuestro primer viaje a Mérida", date: "[fecha]" },
+    { src: "assets/foto-5.jpg", caption: "Taxco, mi amor: todos los destinos están tan llenos de magia", date: "[fecha]" },
+    { src: "assets/foto-6.jpg", caption: "Nuestro primer mundial, qué emoción", date: "[fecha]" },
+    { src: "assets/foto-7.jpg", caption: "Amo ir a museos contigo", date: "[fecha]" },
+    { src: "assets/foto-8.jpg", caption: "Gracias por hacer mi cumpleaños tan especial, quiero hacer siempre los tuyos tan especial", date: "[fecha]" },
   ],
 
   // Canciones: pon el videoId de YouTube (lo que va después de "v=" en la URL)
@@ -321,10 +323,13 @@ function renderGallery(){
   CONFIG.photos.forEach((photo, i) => {
     const wrap = document.createElement("div");
     wrap.className = "polaroid";
+    const photoContent = photo.src
+      ? `<img src="${photo.src}" alt="${photo.caption}">`
+      : `foto ${i + 1}`;
     wrap.innerHTML = `
       <div class="polaroid-inner">
         <div class="polaroid-face polaroid-front">
-          <div class="polaroid-photo">foto ${i + 1}</div>
+          <div class="polaroid-photo">${photoContent}</div>
           <div class="polaroid-num">toca para voltear</div>
         </div>
         <div class="polaroid-face polaroid-back">
