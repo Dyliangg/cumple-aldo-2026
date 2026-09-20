@@ -411,6 +411,7 @@ function startKissGame(){
   kissTimeEl.textContent = "Tiempo: 20";
   kissGame.querySelectorAll(".kiss-item").forEach(el => el.remove());
   kissStart.classList.add("hidden");
+  document.getElementById("kiss-back-menu").classList.add("hidden");
 
   kissSpawnInterval = setInterval(spawnKissItem, 700);
   kissInterval = setInterval(moveKissItems, 50);
@@ -458,6 +459,7 @@ function endKissGame(){
   kissGame.querySelectorAll(".kiss-item").forEach(el => el.remove());
   kissStart.textContent = `¡${kissScore} atrapados! Jugar de nuevo`;
   kissStart.classList.remove("hidden");
+  document.getElementById("kiss-back-menu").classList.remove("hidden");
   if (kissScore >= 5) markLevelDone(1);
 }
 
