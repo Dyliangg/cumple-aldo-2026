@@ -628,6 +628,19 @@ button{
 .letter-signature{
   margin-top: 22px;
 }
+.letter-highlight{
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--rose);
+}
+.letter-signature-big{
+  margin-top: 26px;
+  text-align: center;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--rose);
+  letter-spacing: 0.02em;
+}
 
 /* ===== Arcade ===== */
 .progress-bar{
